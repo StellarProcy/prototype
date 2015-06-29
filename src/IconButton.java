@@ -32,7 +32,7 @@ public class IconButton extends JButton{
 
 	public void paint(){
 		Image img = this.getImage(filename);
-	    setIcon(new ImageIcon(img));
+	    	setIcon(new ImageIcon(img));
 	}
 	
 	
@@ -58,6 +58,6 @@ public class IconButton extends JButton{
 	
 	public void rolloverPaint(){
 		Image rollover = getImage(64, 64, Color.ORANGE).getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-	    setRolloverIcon(new ImageIcon(rollover));
+	    	setRolloverIcon(new ImageIcon(rollover));
 	}
 }
