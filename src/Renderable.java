@@ -1,8 +1,6 @@
-import java.awt.Rectangle;
 
-
-public interface Renderable {
+public interface Renderable <T>{
 
 	public void render();
-	public Rectangle render(Object obj, Rectangle rect);
+	public T render(Object obj, T arg);
 }

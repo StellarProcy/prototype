@@ -4,17 +4,15 @@ import java.awt.MenuContainer;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 
 public class WalletView extends Component 
-<<<<<<< HEAD
 						implements Wallet {
-=======
-			implements ActionListener, Wallet{
->>>>>>> origin/master
 
 	/**
 	 * 
@@ -63,7 +61,6 @@ public class WalletView extends Component
 	private void initialize (){
 		field.setEditable(false);
 		field.setText("0");
-		//close.setIcon(new ImageIcon(Window.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose-pressed.gif")));
 		close.drawIcon("close.gif");
 		edit.drawIcon("karandash.gif");
 	}
@@ -99,7 +96,14 @@ public class WalletView extends Component
 	}
 	
 	
-	
+	public List<Component> getComponents(){
+		List<Component> list = new ArrayList<Component>();
+		list.add(close);
+		list.add(edit);
+		list.add(field);
+		list.add(wallet);
+		return list;
+	}
 	@Override
 	public Long getID() {
 		return ID;

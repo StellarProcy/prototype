@@ -1,3 +1,5 @@
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
-public class WalletViewController implements Renderable, ActionListener{
+public class ViewController implements Renderable<Rectangle>, ActionListener{
 	
 	private JFrame frame;
 	private JButton addWallet; 
@@ -24,7 +26,7 @@ public class WalletViewController implements Renderable, ActionListener{
 	private final int FINAL_HEIGHT = 60;
 	private final int FINAL_RANGE = 20;
 	
-	WalletViewController (JFrame frame, List<String> paths,  List<String> names){
+	ViewController (JFrame frame, List<String> paths,  List<String> names){
 		initialize(paths, names, frame);
 		render();
 	}
@@ -92,17 +94,26 @@ public class WalletViewController implements Renderable, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		Object unknown = arg0.getSource();
 		
-		for (int i = 0; i < wallets.size(); i++){
-			if (unknown.equals(wallets.get(i).close)){
-				frame.getContentPane().remove(wallets.get(i));
-				wallets.remove(i);
-			} else if (unknown.equals(wallets.get(i).edit)){
-				System.out.println("edit!");
+		for (WalletView wallet: wallets){
+			if (unknown.equals(wallet.close)){
+				
+				delete (frame.getContentPane(),
+						wallet.getComponents());
+				
+				wallets.remove(wallet);
+				break;
+			} else if (unknown.equals(wallet.edit)){
+				// do smthg
 			}
 		}
-		
-		render();
-		
+		render();	
+	}
+	
+	
+	private void delete(Container content, List<Component> components){
+		for (Component component: components){
+			content.remove(component);
+		}
 	}
 
 

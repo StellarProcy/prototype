@@ -1,30 +1,20 @@
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.Rectangle;
 
 import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.TransferHandler;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 
-import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JToggleButton;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 
 
 public class Window implements ActionListener{
@@ -44,7 +34,7 @@ public class Window implements ActionListener{
 	private WalletView walletView;
 	private DiagramPanel diagPanel;
 	
-	private WalletViewController viewController;
+	private ViewController walletController;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -76,7 +66,7 @@ public class Window implements ActionListener{
 										"YandexMoney",
 										"Наличные");
 		
-		viewController = new WalletViewController (frame, paths, names);
+		walletController = new ViewController (frame, paths, names);
 		
 	}
 	public Window() {
