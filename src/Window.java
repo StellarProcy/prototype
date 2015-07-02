@@ -18,6 +18,8 @@ import javax.swing.JMenu;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JToggleButton;
@@ -42,6 +44,7 @@ public class Window implements ActionListener{
 	private WalletView walletView;
 	private DiagramPanel diagPanel;
 	
+	private WalletViewController viewController;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,9 +60,28 @@ public class Window implements ActionListener{
 		});
 	}
 
-	
+	private void initializeViewController(){
+		List<String> paths = Arrays.
+								asList(
+										"visa.bmp",
+										"mastercard.bmp",
+										"paypal.bmp",
+										"yandexmoney.bmp",
+										"cash.bmp");
+		List<String> names = Arrays.
+								asList(
+										"Visa",
+										"MasterCard",
+										"PayPal",
+										"YandexMoney",
+										"Наличные");
+		
+		viewController = new WalletViewController (frame, paths, names);
+		
+	}
 	public Window() {
 		initialize();
+		initializeViewController();
 	}
 
 	private void initialize() {
@@ -116,11 +138,12 @@ public class Window implements ActionListener{
 		menuItemAbout = new JMenuItem("\u041E \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0435");
 		menuHelp.add(menuItemAbout);
 		
+		/*
 		walletView = new WalletView();
 		walletView.setBounds(10, 30, 80, 60);
 		walletView.setIcon("visa.bmp");
 		walletView.appendTo(frame.getContentPane());
-		
+		*/
 
 	}
 

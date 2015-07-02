@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.MenuContainer;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +10,7 @@ import javax.swing.JTextField;
 
 
 public class WalletView extends Component 
-						implements ActionListener, Wallet{
+						implements Wallet {
 
 	/**
 	 * 
@@ -58,11 +59,11 @@ public class WalletView extends Component
 	private void initialize (){
 		field.setEditable(false);
 		field.setText("0");
-		close.setIcon(new ImageIcon(Window.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose-pressed.gif")));
+		//close.setIcon(new ImageIcon(Window.class.getResource("/javax/swing/plaf/metal/icons/ocean/paletteClose-pressed.gif")));
+		close.drawIcon("close.gif");
 		edit.drawIcon("karandash.gif");
-		close.addActionListener(this);
-		edit.addActionListener(this);
 	}
+	
 	
 	public void appendTo(Container content){
 		initialize();
@@ -93,18 +94,6 @@ public class WalletView extends Component
 		wallet.setBounds(x, y, width, height);
 	}
 	
-	//TODO: GOTTA FINISH THIS
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
-		Object unknown = arg0.getSource();
-		
-		if (unknown.equals(close)){
-			//DO SMTG
-		} else if (unknown.equals(edit)){
-			//DO SMTG
-		}
-	}
 	
 	
 	@Override
