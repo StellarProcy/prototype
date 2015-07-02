@@ -9,12 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 
-public class WalletView extends Component 
-<<<<<<< HEAD
-						implements Wallet {
-=======
-			implements ActionListener, Wallet{
->>>>>>> origin/master
+public class WalletView extends Component implements Wallet {
 
 	/**
 	 * 
