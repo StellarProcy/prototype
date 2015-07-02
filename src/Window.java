@@ -29,11 +29,6 @@ public class Window implements ActionListener{
 
 	private JFrame frame;
 	private GraphPanel gistPanel;
-	private IconButton buttonMasterCard;
-	private IconButton buttonYandexMoney;
-	private IconButton buttonPayPal;
-	private JButton buttonAdd;
-	
 	private JToggleButton buttonYear;
 	private JToggleButton buttonMonth;
 	private JToggleButton buttonWeek;
@@ -44,7 +39,7 @@ public class Window implements ActionListener{
 	private JMenuItem menuItemTransactionHistory;
 	private JMenuItem menuItemHelpContent;
 	private JMenuItem menuItemAbout;
-	private Wallet wallet;
+	private WalletView walletView;
 	private DiagramPanel diagPanel;
 	
 
@@ -121,10 +116,10 @@ public class Window implements ActionListener{
 		menuItemAbout = new JMenuItem("\u041E \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0435");
 		menuHelp.add(menuItemAbout);
 		
-		wallet = new Wallet();
-		wallet.setBounds(10, 30, 80, 60);
-		wallet.setIcon("visa.bmp");
-		wallet.appendTo(frame.getContentPane());
+		walletView = new WalletView();
+		walletView.setBounds(10, 30, 80, 60);
+		walletView.setIcon("visa.bmp");
+		walletView.appendTo(frame.getContentPane());
 		
 
 	}

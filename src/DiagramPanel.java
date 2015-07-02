@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
- 
+
  /**
   * @author 73morozzz
   */
@@ -17,7 +17,6 @@ public class DiagramPanel extends JPanel implements Changeable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer[] values ;
-	
      private Insets insets;
      Color colors[] = { 
          Color.RED,
@@ -38,11 +37,11 @@ public class DiagramPanel extends JPanel implements Changeable{
 
    @Override
    public void change(ActionEvent e) {
-	   if (e.getActionCommand().equals("ГѓГ®Г¤")){
+	   if (e.getActionCommand().equals("Год")){
 		   values[5] = new Integer(300);
-	   } else if (e.getActionCommand().equals("ГЊГҐГ±ГїГ¶")){
+	   } else if (e.getActionCommand().equals("Месяц")){
 		   values[5] = new Integer(100);
-	   } else if (e.getActionCommand().equals("ГЌГҐГ¤ГҐГ«Гї")){
+	   } else if (e.getActionCommand().equals("Неделя")){
 		   values[5] = new Integer(5);
 	   }
 
