@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 
-public class GraphPanel extends JPanel{
+public class GraphPanel extends JPanel implements Changeable{
 	
 	private double p = 1;
 	
@@ -37,8 +37,9 @@ public class GraphPanel extends JPanel{
 		return (int) result;
 	}
 	
-	// example
-	public void render (ActionEvent e){
+
+	@Override
+	public void change(ActionEvent e) {
 		if (e.getActionCommand().equals("Ãמה")){
 			p = 1.5;
 		} else if (e.getActionCommand().equals("Ìוסÿצ")){

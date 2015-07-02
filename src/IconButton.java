@@ -24,16 +24,26 @@ public class IconButton extends JButton{
 		return bImg.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
 	}
 
-	
+	IconButton(){
+		super();
+	}
 	IconButton(String filename) {
 		super();
 		this.filename = filename;
 	}
 
-	public void paint(){
-		Image img = this.getImage(filename);
-	    	setIcon(new ImageIcon(img));
+	
+	public void drawIcon(){
+		drawIcon(this.filename);
 	}
+	
+	public void drawIcon(String filename){
+		if (filename != null) {
+			Image img = this.getImage(filename);
+			setIcon(new ImageIcon(img));
+		}
+	}
+
 	
 	
 	private Image getImage(String filename){
@@ -58,6 +68,6 @@ public class IconButton extends JButton{
 	
 	public void rolloverPaint(){
 		Image rollover = getImage(64, 64, Color.ORANGE).getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-	    	setRolloverIcon(new ImageIcon(rollover));
+	    setRolloverIcon(new ImageIcon(rollover));
 	}
 }
