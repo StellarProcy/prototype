@@ -10,7 +10,11 @@ import javax.swing.JTextField;
 
 
 public class WalletView extends Component 
+<<<<<<< HEAD
 						implements Wallet {
+=======
+			implements ActionListener, Wallet{
+>>>>>>> origin/master
 
 	/**
 	 * 
