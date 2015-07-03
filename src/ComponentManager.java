@@ -11,12 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 
-<<<<<<< HEAD
-public class WalletView extends Component 
-						implements Wallet {
-=======
-public class WalletView extends Component implements Wallet {
->>>>>>> origin/master
+public class ComponentManager extends Component 
+							  implements Wallet {
 
 	/**
 	 * 
@@ -25,7 +21,7 @@ public class WalletView extends Component implements Wallet {
 
 	protected RubleUnit balance;
 	
-	protected IconButton wallet = new IconButton();
+	protected IconButton button = new IconButton();
 	protected IconButton close  = new IconButton();
 	protected IconButton edit = new IconButton();
 	
@@ -34,13 +30,13 @@ public class WalletView extends Component implements Wallet {
 	private Long ID;
 	private String name;
 	
-	WalletView (){
+	ComponentManager (){
 		this(0, 0, 0, 0);
 	}
-	WalletView (int x, int y, int width, int height){
+	ComponentManager (int x, int y, int width, int height){
 		this(new Rectangle(x, y, width, height));
 	}
-	WalletView (Rectangle rect){
+	ComponentManager (Rectangle rect){
 		this.setBounds(rect);
 	}
 	
@@ -57,7 +53,7 @@ public class WalletView extends Component implements Wallet {
 	}
 	
 	public void setIcon(String filename){
-		wallet.drawIcon(filename);
+		button.drawIcon(filename);
 	}
 	
 	
@@ -72,7 +68,7 @@ public class WalletView extends Component implements Wallet {
 	
 	public void appendTo(Container content){
 		initialize();
-		content.add(wallet);
+		content.add(button);
 		content.add(close);
 		content.add(edit);
 		content.add(field);
@@ -96,7 +92,7 @@ public class WalletView extends Component implements Wallet {
 		close.setBounds(x + width, y,		    divided, divided);
 		edit.setBounds (x + width, y + divided, divided, divided);
 		
-		wallet.setBounds(x, y, width, height);
+		button.setBounds(x, y, width, height);
 	}
 	
 	
@@ -105,7 +101,7 @@ public class WalletView extends Component implements Wallet {
 		list.add(close);
 		list.add(edit);
 		list.add(field);
-		list.add(wallet);
+		list.add(button);
 		return list;
 	}
 	@Override
@@ -116,14 +112,7 @@ public class WalletView extends Component implements Wallet {
 	public void setID(Long ID) {
 		this.ID = ID;
 	}
-	@Override
-	public double getAmount() {
-		return balance.get();
-	}
-	@Override
-	public void setAmount(double amount) {
-		balance.set(amount);
-	}
+	
 	@Override
 	public void setName(String name){
 		this.name = name;
@@ -131,6 +120,14 @@ public class WalletView extends Component implements Wallet {
 	@Override
 	public String getName(){
 		return name;
+	}
+	@Override
+	public Monetary getAmount() {
+		return balance;
+	}
+	@Override
+	public void setAmount(Monetary amount) {
+		this.balance = (RubleUnit) amount;
 	}
 
 	

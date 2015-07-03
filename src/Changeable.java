@@ -1,7 +1,6 @@
-import java.awt.event.ActionEvent;
 
 
-public interface Changeable {
+public interface Changeable <T>{
 	
-	public void change (ActionEvent e);
+	public void change (T e);
 }

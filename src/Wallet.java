@@ -7,6 +7,6 @@ public interface Wallet {
 	public String getName();
 	public void setName(String name);
 	
-	public double getAmount();
-	public void setAmount(double amount);
+	public Monetary getAmount();
+	public void setAmount(Monetary amount);
 }

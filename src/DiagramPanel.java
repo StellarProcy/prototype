@@ -7,7 +7,7 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
  
-public class DiagramPanel extends JPanel implements Changeable{
+public class DiagramPanel extends JPanel implements Changeable<ActionEvent>{
 
 	 /**
 	 * 

@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 
-public class GraphPanel extends JPanel implements Changeable{
+public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 	
 	private double p = 1;
 	

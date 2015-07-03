@@ -15,6 +15,8 @@ import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JToggleButton;
+import javax.swing.JButton;
+import java.awt.Color;
 
 
 public class Window implements ActionListener{
@@ -31,11 +33,8 @@ public class Window implements ActionListener{
 	private JMenuItem menuItemTransactionHistory;
 	private JMenuItem menuItemHelpContent;
 	private JMenuItem menuItemAbout;
-	private WalletView walletView;
 	private DiagramPanel diagPanel;
 	
-	private ViewController walletController;
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -66,9 +65,26 @@ public class Window implements ActionListener{
 										"YandexMoney",
 										"Наличные");
 		
-		walletController = new ViewController (frame, paths, names);
+		new ViewWalletController (frame, paths, names);
 		
+		List<String> income = Arrays.
+								asList(
+										"Зарплата",
+										"Активы",
+										"Дивиденты",
+										"Фриланс");
+		
+		List<String> expense = Arrays.
+								asList(
+										"Развлечения",
+										"Продукты",
+										"Квартира",
+										"Транспорт",
+										"Заведения");
+		
+		new ViewCategoryController (frame, income, expense);
 	}
+	
 	public Window() {
 		initialize();
 		initializeViewController();
@@ -128,12 +144,6 @@ public class Window implements ActionListener{
 		menuItemAbout = new JMenuItem("\u041E \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0435");
 		menuHelp.add(menuItemAbout);
 		
-		/*
-		walletView = new WalletView();
-		walletView.setBounds(10, 30, 80, 60);
-		walletView.setIcon("visa.bmp");
-		walletView.appendTo(frame.getContentPane());
-		*/
 
 	}
 
