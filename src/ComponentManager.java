@@ -10,9 +10,13 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
+<<<<<<< HEAD
 
 public class ComponentManager extends Component 
 							  implements Wallet {
+=======
+public class WalletView extends Component implements Wallet {
+>>>>>>> origin/master
 
 	/**
 	 * 
