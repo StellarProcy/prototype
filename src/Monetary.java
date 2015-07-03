@@ -5,7 +5,7 @@ public interface Monetary {
 	
 	public String getCanonicalName();
 	
-	public double get();
+	public int get();
 
 	
 }

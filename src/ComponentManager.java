@@ -11,19 +11,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 
-<<<<<<< HEAD:src/ComponentManager.java
 public class ComponentManager extends Component 
 							  implements Wallet {
-=======
-public class WalletView extends Component implements Wallet {
->>>>>>> origin/master:src/WalletView.java
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected RubleUnit balance;
+	protected RubleUnit balance = new RubleUnit();
 	
 	protected IconButton button = new IconButton();
 	protected IconButton close  = new IconButton();

@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,9 @@ public class ViewWalletController implements Renderable<Rectangle>, ActionListen
 	private final int FINAL_WIDTH = 80;
 	private final int FINAL_HEIGHT = 60;
 	private final int FINAL_RANGE = 20;
+	
+	private DialogFrame dialog;
+	private ComponentManager buffer;
 	
 	ViewWalletController (JFrame frame, List<String> paths,  List<String> names){
 		initialize(paths, names, frame);
@@ -90,7 +94,28 @@ public class ViewWalletController implements Renderable<Rectangle>, ActionListen
 		return rect;
 	}
 
-	//TODO: COMPLETE EDIT ACTION
+	private void fill(ComponentManager unknown, DialogFrame frame){
+		unknown.setName(frame.textName.getText());
+		unknown.balance.set(Integer.parseInt(frame.textMonetary.getText()));
+		unknown.field.setText(unknown.balance.toString());
+	}
+	private void check(Object unknown, DialogFrame obj){
+		if (obj == null)
+			return;
+		if (unknown.equals(obj.cancelButton)){
+			obj.dispose();
+		} else if (unknown.equals(obj.okButton)){
+			try {
+				obj.validateFields();
+				fill(buffer, obj);
+				obj.dispose();
+			} catch (IllegalArgumentException ex){
+				obj.labelException.setText(ex.getMessage());
+				obj.labelException.setVisible(true);
+			}
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object unknown = arg0.getSource();
@@ -104,9 +129,15 @@ public class ViewWalletController implements Renderable<Rectangle>, ActionListen
 				wallets.remove(wallet);
 				break;
 			} else if (unknown.equals(wallet.edit)){
-				// do smthg
+				buffer = (ComponentManager) wallet;
+				dialog = new DialogFrame(frame, true, wallet.getName(), wallet.getAmount(), false);
+				dialog.cancelButton.addActionListener(this);
+				dialog.okButton.addActionListener(this);
+				dialog.setVisible(true);
+				
 			}
 		}
+		check(unknown, dialog);
 		render();	
 	}
 	

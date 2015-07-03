@@ -2,22 +2,20 @@
 public class RubleUnit implements Monetary{
 	
 	RubleUnit(){
-		this(0.0);
+		this(0);
 	}
+	
 	RubleUnit(int value){
-		this((double) value);
-	}
-	RubleUnit(double value){
 		this.value = value;
 	}
 
 	
-	private String token = "₽";
+	private String token = "р";
 	private String name = "рубль";
 	
-	private double value;
+	private int value = 0;
 	
-	public void set(double value){
+	public void set(int value){
 		this.value = value;
 	}
 	
@@ -29,8 +27,13 @@ public class RubleUnit implements Monetary{
 		return name;
 	}
 
-	public double get() {
+	public int get() {
 		return value;
+	}
+	
+	@Override
+	public String toString(){
+		return value + token;
 	}
 
 }

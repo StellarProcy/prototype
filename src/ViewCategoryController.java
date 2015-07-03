@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 
@@ -27,6 +29,8 @@ public class ViewCategoryController implements Renderable<Rectangle>, ActionList
 	private final int FINAL_HEIGHT = 50;
 	private final int FINAL_RANGE = 5;
 	
+	private ComponentManager buffer;
+	private DialogFrame dialog;
 	
 	ViewCategoryController(JFrame frame, List<String> income, List<String> expense){
 		initialize(frame, income, expense);
@@ -134,7 +138,33 @@ public class ViewCategoryController implements Renderable<Rectangle>, ActionList
 				list.remove(cm);
 				break;
 			} else if (unknown.equals(cm.edit)){
-				// do smthg
+				buffer = (ComponentManager) cm;
+				dialog = new DialogFrame(frame, true, cm.getName(), cm.getAmount(), true);
+				dialog.cancelButton.addActionListener(this);
+				dialog.okButton.addActionListener(this);
+				dialog.setVisible(true);	
+			}
+		}
+	}
+	private void fill(ComponentManager unknown, DialogFrame frame){
+		unknown.setName(frame.textName.getText());
+		unknown.button.setText(frame.textName.getText());
+		unknown.balance.set(Integer.parseInt(frame.textMonetary.getText()));
+		unknown.field.setText(unknown.balance.toString());
+	}
+	private void check(Object unknown, DialogFrame obj){
+		if (obj == null)
+			return;
+		if (unknown.equals(obj.cancelButton)){
+			obj.dispose();
+		} else if (unknown.equals(obj.okButton)){
+			try {
+				obj.validateFields();
+				fill(buffer, obj);
+				obj.dispose();
+			} catch (IllegalArgumentException ex){
+				obj.labelException.setText(ex.getMessage());
+				obj.labelException.setVisible(true);
 			}
 		}
 	}
@@ -143,6 +173,7 @@ public class ViewCategoryController implements Renderable<Rectangle>, ActionList
 		Object unknown = arg0.getSource();
 		check(unknown, income);
 		check(unknown, expense);
+		check(unknown, dialog);
 		render();	
 	}
 	
