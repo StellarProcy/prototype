@@ -14,183 +14,288 @@ public class Database {
 
 	public static void main(String[] args) throws ClassNotFoundException,
 			SQLException {
-		 //CreateDB();
-		 //WriteDB();
+		// CreateDB();
+		// WriteDB();
 		// DelIncome(8);
 		// Integer in = AddIncome("Бензин");
 		// System.out.println(in + " ответ");
-		//AddExpenseStory(1,1,20);
-		//AddIncomeStory(1,1,30);
-		//ReadDB();
+		// AddExpenseStory(4,1,70);
+		// AddIncomeStory(1,1,30);
+		// ReadDB();
 		// GetListWallet();
+		GetListExpenseHistory(3);
 	}
 
-
 	// добавление кошелька
-	public static Integer AddWallet(String name, Integer amount)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		resSet = statmt.executeQuery("SELECT id FROM wallet WHERE name='"
-				+ name + "'");
-		if (!resSet.next()) {
-			statmt.execute("INSERT INTO 'wallet' ('name', 'amount') VALUES ('"
-					+ name + "', " + amount + "); ");
+	public static Integer AddWallet(String name, Integer amount) {
+		Integer idWallet = -1;
+		try {
+			Conn();
 			resSet = statmt.executeQuery("SELECT id FROM wallet WHERE name='"
 					+ name + "'");
-			resSet.next();
-			Integer idWallet = resSet.getInt("id");
-			resSet.close();
-			CloseDB();
-			return idWallet;
-		} else {
-			return -1;
+			if (!resSet.next()) {
+				statmt.execute("INSERT INTO 'wallet' ('name', 'amount') VALUES ('"
+						+ name + "', " + amount + "); ");
+				resSet = statmt
+						.executeQuery("SELECT id FROM wallet WHERE name='"
+								+ name + "'");
+				resSet.next();
+				idWallet = resSet.getInt("id");
+				resSet.close();
+				CloseDB();
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return idWallet;
+
 	}
 
 	// удаление кошелька
-	public static void DelWallet(Integer idWallet)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		statmt.execute("DELETE FROM wallet WHERE id=" + idWallet);
-		CloseDB();
+	public static void DelWallet(Integer idWallet) {
+		try {
+			Conn();
+			statmt.execute("DELETE FROM wallet WHERE id=" + idWallet);
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// добавление категории доходов
-	public static Integer AddIncome(String name, Integer amount)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		resSet = statmt.executeQuery("SELECT id FROM income WHERE name='"
-				+ name + "'");
-		if (!resSet.next()) {
-			statmt.execute("INSERT INTO 'income' ('name') VALUES ('" + name
-					+ "', " + amount + "); ");
+	public static Integer AddIncome(String name, Integer amount) {
+		Integer idIncome = -1;
+		try {
+			Conn();
 			resSet = statmt.executeQuery("SELECT id FROM income WHERE name='"
 					+ name + "'");
-			resSet.next();
-			Integer idIncome = resSet.getInt("id");
-			resSet.close();
-			CloseDB();
-			return idIncome;
-		} else {
-			return -1;
+			if (!resSet.next()) {
+				statmt.execute("INSERT INTO 'income' ('name') VALUES ('" + name
+						+ "', " + amount + "); ");
+				resSet = statmt
+						.executeQuery("SELECT id FROM income WHERE name='"
+								+ name + "'");
+				resSet.next();
+				idIncome = resSet.getInt("id");
+				resSet.close();
+				CloseDB();
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return idIncome;
 	}
 
 	// удаление категории доходов
-	public static void DelIncome(Integer idIncome)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		statmt.execute("DELETE FROM income WHERE id=" + idIncome);
-		CloseDB();
-	}
-
-	// добавление категории расходов
-	public static Integer AddExpense(String name, Integer amount)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		resSet = statmt.executeQuery("SELECT id FROM expense WHERE name='"
-				+ name + "'");
-		if (!resSet.next()) {
-			statmt.execute("INSERT INTO 'expense' ('name') VALUES ('" + name
-					+ "', " + amount + "); ");
-			resSet = statmt.executeQuery("SELECT id FROM expense WHERE name='"
-					+ name + "'");
-			resSet.next();
-			Integer idExpense = resSet.getInt("id");
-			resSet.close();
+	public static void DelIncome(Integer idIncome) {
+		try {
+			Conn();
+			statmt.execute("DELETE FROM income WHERE id=" + idIncome);
 			CloseDB();
-			return idExpense;
-		} else {
-			return -1;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
+	// добавление категории расходов
+	public static Integer AddExpense(String name, Integer amount) {
+		Integer idExpense = -1;
+		try {
+			Conn();
+			resSet = statmt.executeQuery("SELECT id FROM expense WHERE name='"
+					+ name + "'");
+			if (!resSet.next()) {
+				statmt.execute("INSERT INTO 'expense' ('name') VALUES ('"
+						+ name + "', " + amount + "); ");
+				resSet = statmt
+						.executeQuery("SELECT id FROM expense WHERE name='"
+								+ name + "'");
+				resSet.next();
+				idExpense = resSet.getInt("id");
+				resSet.close();
+				CloseDB();
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return idExpense;
+	}
+
 	// удаление категории расходов
-	public static void DelExpense(Integer idExpense)
-			throws ClassNotFoundException, SQLException {
-		Conn();
-		statmt.execute("DELETE FROM expense WHERE id=" + idExpense);
-		CloseDB();
+	public static void DelExpense(Integer idExpense) {
+		try {
+			Conn();
+			statmt.execute("DELETE FROM expense WHERE id=" + idExpense);
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// добавление транзакции дохода
 	public static void AddIncomeStory(Integer idIncome, Integer idWallet,
-			Integer many) throws ClassNotFoundException, SQLException {
-		Conn();
-		statmt.execute("INSERT INTO 'incomeStory' ('id_income', 'id_wallet', 'dateIncome', 'many') VALUES ("
-				+ idIncome + ", " + idWallet + ", date('now')," + many + "); ");
-		
-		statmt.execute("UPDATE income SET amount = amount+'"+many+"' WHERE id="+idIncome+"; ");
-		statmt.execute("UPDATE wallet SET amount = amount+'"+many+"' WHERE id="+idWallet+"; ");
-		
-		CloseDB();
+			Integer many) {
+		try {
+			Conn();
+			statmt.execute("INSERT INTO 'incomeStory' ('id_income', 'id_wallet', 'dateIncome', 'many') VALUES ("
+					+ idIncome
+					+ ", "
+					+ idWallet
+					+ ", date('now'),"
+					+ many
+					+ "); ");
+
+			statmt.execute("UPDATE income SET amount = amount+'" + many
+					+ "' WHERE id=" + idIncome + "; ");
+			statmt.execute("UPDATE wallet SET amount = amount+'" + many
+					+ "' WHERE id=" + idWallet + "; ");
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// добавление транзакции расхода
 	public static void AddExpenseStory(Integer idExpense, Integer idWallet,
-			Integer many) throws ClassNotFoundException, SQLException {
-		Conn();
-		statmt.execute("INSERT INTO 'expenseStory' ('id_expense', 'id_wallet', 'dateExpense', 'many') VALUES ("
-				+ idExpense + ", " + idWallet + ", date('now')," + many + "); ");
-		
-		statmt.execute("UPDATE expense SET amount = amount+'"+many+"' WHERE id="+idExpense+"; ");
-		statmt.execute("UPDATE wallet SET amount = amount-'"+many+"' WHERE id="+idWallet+"; ");
-		
-		CloseDB();
+			Integer many) {
+		try {
+			Conn();
+			statmt.execute("INSERT INTO 'expenseStory' ('id_expense', 'id_wallet', 'dateExpense', 'many') VALUES ("
+					+ idExpense
+					+ ", "
+					+ idWallet
+					+ ", date('now'),"
+					+ many
+					+ "); ");
+
+			statmt.execute("UPDATE expense SET amount = amount+'" + many
+					+ "' WHERE id=" + idExpense + "; ");
+			statmt.execute("UPDATE wallet SET amount = amount-'" + many
+					+ "' WHERE id=" + idWallet + "; ");
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// вывод списка кошельков
-	public static List<WalletImpl> GetListWallet()
-			throws ClassNotFoundException, SQLException {
+	public static List<WalletImpl> GetListWallet() {
 		List<WalletImpl> list = new ArrayList<WalletImpl>();
-
-		Conn();
-		resSet = statmt.executeQuery("SELECT * FROM wallet");
-		while (resSet.next()) {
-			int id = resSet.getInt("id");
-			String name = resSet.getString("name");
-			int amount = resSet.getInt("amount");
-			Monetary ruble = new RubleUnit(amount);
-			WalletImpl wallet = new WalletImpl(id, name, ruble);
-			list.add(wallet);
+		try {
+			Conn();
+			resSet = statmt.executeQuery("SELECT * FROM wallet");
+			while (resSet.next()) {
+				int id = resSet.getInt("id");
+				String name = resSet.getString("name");
+				int amount = resSet.getInt("amount");
+				Monetary ruble = new RubleUnit(amount);
+				WalletImpl wallet = new WalletImpl(id, name, ruble);
+				list.add(wallet);
+			}
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
 
-	
 	// вывод списка доходов
-	public static List<WalletImpl> GetListIncome()
-			throws ClassNotFoundException, SQLException {
+	public static List<WalletImpl> GetListIncome() {
 		List<WalletImpl> list = new ArrayList<WalletImpl>();
-
-		Conn();
-		resSet = statmt.executeQuery("SELECT * FROM income");
-		while (resSet.next()) {
-			int id = resSet.getInt("id");
-			String name = resSet.getString("name");
-			int amount = resSet.getInt("amount");
-			Monetary ruble = new RubleUnit(amount);
-			WalletImpl wallet = new WalletImpl(id, name, ruble);
-			list.add(wallet);
+		try {
+			Conn();
+			resSet = statmt.executeQuery("SELECT * FROM income");
+			while (resSet.next()) {
+				int id = resSet.getInt("id");
+				String name = resSet.getString("name");
+				int amount = resSet.getInt("amount");
+				Monetary ruble = new RubleUnit(amount);
+				WalletImpl wallet = new WalletImpl(id, name, ruble);
+				list.add(wallet);
+			}
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
 
-	
 	// вывод списка расходов
-	public static List<WalletImpl> GetListExpense()
-			throws ClassNotFoundException, SQLException {
+	public static List<WalletImpl> GetListExpense() {
 		List<WalletImpl> list = new ArrayList<WalletImpl>();
+		try {
+			Conn();
+			resSet = statmt.executeQuery("SELECT * FROM expense");
+			while (resSet.next()) {
+				int id = resSet.getInt("id");
+				String name = resSet.getString("name");
+				int amount = resSet.getInt("amount");
+				Monetary ruble = new RubleUnit(amount);
+				WalletImpl wallet = new WalletImpl(id, name, ruble);
+				list.add(wallet);
+			}
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 
-		Conn();
-		resSet = statmt.executeQuery("SELECT * FROM expense");
-		while (resSet.next()) {
-			int id = resSet.getInt("id");
-			String name = resSet.getString("name");
-			int amount = resSet.getInt("amount");
-			Monetary ruble = new RubleUnit(amount);
-			WalletImpl wallet = new WalletImpl(id, name, ruble);
-			list.add(wallet);
+	/*
+	 * список расходов за период 0-за весь период;
+	 * 1 - за текущий месяц;
+	 * 2 - за текущий квартал;
+	 * 3 - за текущий год;
+	 * 4 - за последние 2 года;
+	 */
+	public static List<WalletImpl> GetListExpenseHistory(int p) {
+		String query = "";
+		switch (p) {
+		case 0:
+			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id";
+			break;
+		case 1:
+			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) and strftime('%y', dateExpense) = strftime('%y', date('now'));";
+			break;
+		case 2:
+			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) and strftime('%y', dateExpense) = strftime('%y', date('now'));";
+			break;
+		case 3:
+			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%y', dateExpense) < strftime('%y', date('now'));";
+			break;
+		case 4:
+			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%y', dateExpense) = strftime('%y', date('now')) OR strftime('%y', dateExpense) = strftime('%y', date('now'), '-1 month');";
+			break;
+
+		}
+		List<WalletImpl> list = new ArrayList<WalletImpl>();
+		try {
+			Conn();
+			resSet = statmt.executeQuery(query);
+			while (resSet.next()) {
+				int id = resSet.getInt("id");
+				String name = resSet.getString("name");
+				int many = resSet.getInt("many");
+				Monetary ruble = new RubleUnit(many);
+				WalletImpl wallet = new WalletImpl(id, name, ruble);
+				list.add(wallet);
+				System.out.println("id= "+id);
+			}
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
@@ -246,7 +351,7 @@ public class Database {
 			System.out.println("name = " + name);
 			System.out.println();
 		}
-		
+
 		resSet = statmt.executeQuery("SELECT * FROM wallet");
 		while (resSet.next()) {
 			int id = resSet.getInt("id");

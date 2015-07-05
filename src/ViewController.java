@@ -32,6 +32,7 @@ public class ViewController implements Renderable, ActionListener{
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
 	
+<<<<<<< HEAD
 	private final String NO_NAME = "Безымянный";
 	
 	private final ComponentOrientation categoryOrientation = ComponentOrientation.RIGHT_TO_LEFT;
@@ -46,6 +47,29 @@ public class ViewController implements Renderable, ActionListener{
 	}
 	public void addExpense(Collection<WalletImpl> expense){
 		createList(expense, this.expense, exColor, getExRect(), categoryOrientation);
+=======
+	public List<ComponentManager> getWallets() {
+		return wallets;
+	}
+	
+	public List<ComponentManager> getIncome() {
+		return income;
+	}
+	
+	public List<ComponentManager> getExpense() {
+		return expense;
+	}
+	
+	public void addWallets(List<WalletImpl> wallets){
+		createList(wallets, this.wallets, waColor, getWaRect());
+		
+	}
+	public void addIncome(List<WalletImpl> income){
+		createList(income, this.income, inColor, getInRect());
+	}
+	public void addExpense(List<WalletImpl> expense){
+		createList(expense, this.expense, exColor, getExRect());
+>>>>>>> origin/master
 	}
 
 	private void initialize(){
@@ -177,6 +201,7 @@ public class ViewController implements Renderable, ActionListener{
 		clearBuffer();
 		render();
 	}
+	
 	
 	private void fill(ComponentManager unknown, DialogFrame frame){
 		if (statement == ST_NEW_EX){

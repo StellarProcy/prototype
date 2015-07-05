@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
-
 public class ComponentManager extends Component {
 
 	/**
@@ -16,45 +15,50 @@ public class ComponentManager extends Component {
 	private static final long serialVersionUID = 1L;
 
 	protected WalletImpl wallet;
-	
+
 	protected IconButton button = new IconButton();
-	protected IconButton close  = new IconButton();
+	protected IconButton close = new IconButton();
 	protected IconButton edit = new IconButton();
-	
+
 	protected JTextField field = new JTextField();
+<<<<<<< HEAD
 	
 	protected IconButton info = new IconButton();
 	
 	ComponentManager (WalletImpl wallet){
+=======
+
+	ComponentManager(WalletImpl wallet) {
+>>>>>>> origin/master
 		this.wallet = wallet.clone();
 	}
-	
-	public WalletImpl getWallet(){
+
+	public WalletImpl getWallet() {
 		return wallet;
 	}
-	
-	public void setWallet(WalletImpl wallet){
+
+	public void setWallet(WalletImpl wallet) {
 		this.wallet = wallet.clone();
 	}
+
 	@Override
-	public void setBounds(int x, int y, int width, int height){
+	public void setBounds(int x, int y, int width, int height) {
 		setBoundsOnComponents(x, y, width, height);
 		super.setBounds(x, y, width, height);
 
 	}
+
 	@Override
-	public void setBounds(Rectangle rect){
+	public void setBounds(Rectangle rect) {
 		setBoundsOnComponents(rect);
 		super.setBounds(rect);
 	}
-	
-	public void setIcon(String filename){
+
+	public void setIcon(String filename) {
 		button.drawIcon(filename);
 	}
-	
-	
-	
-	private void initialize (){
+
+	private void initialize() {
 		field.setEditable(false);
 		field.setText(wallet.getAmount().toString());
 		button.setMargin(new Insets(0, 0, 0, 0));
@@ -62,9 +66,8 @@ public class ComponentManager extends Component {
 		edit.drawIcon("karandash.gif");
 		info.drawIcon("info1.png");
 	}
-	
-	
-	public void appendTo(Container content){
+
+	public void appendTo(Container content) {
 		initialize();
 		content.add(button);
 		content.add(close);
@@ -72,30 +75,34 @@ public class ComponentManager extends Component {
 		content.add(field);
 		content.add(info);
 	}
-	
-	
+
 	protected final int FIELD_RELATION_HEIGHT = 3;
 	protected final int SQUARE_RELATION_HEIGHT = 3;
-	
-	private void setBoundsOnComponents (Rectangle rect){
+
+	private void setBoundsOnComponents(Rectangle rect) {
 		this.setBounds(rect.x, rect.y, rect.width, rect.height);
 	}
-	
-	private void setBoundsOnComponents (int x, int y, int width, int height){
+
+	private void setBoundsOnComponents(int x, int y, int width, int height) {
 		int divided = height / FIELD_RELATION_HEIGHT;
 		height -= divided;
 		field.setBounds(x, y + height, width, divided);
-		
+
 		divided = height / SQUARE_RELATION_HEIGHT;
 		width -= divided;
+<<<<<<< HEAD
 		close.setBounds(x + width, y,		    divided, divided);
 		edit.setBounds (x + width, y + divided, divided, divided);
 		info.setBounds (x + width, y + divided + divided, divided, divided);
+=======
+		close.setBounds(x + width, y, divided, divided);
+		edit.setBounds(x + width, y + divided, divided, divided);
+
+>>>>>>> origin/master
 		button.setBounds(x, y, width, height);
 	}
-	
-	
-	public List<Component> getComponents(){
+
+	public List<Component> getComponents() {
 		List<Component> list = new ArrayList<Component>();
 		list.add(close);
 		list.add(edit);
@@ -103,6 +110,7 @@ public class ComponentManager extends Component {
 		list.add(button);
 		return list;
 	}
+<<<<<<< HEAD
 	
 	public void setVisible(boolean arg){
 		super.setVisible(arg);
@@ -111,4 +119,7 @@ public class ComponentManager extends Component {
 			comp.setVisible(arg);
 	}
 	
+=======
+
+>>>>>>> origin/master
 }

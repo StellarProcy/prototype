@@ -32,9 +32,12 @@ public class Window implements ActionListener{
 	private JMenu menuControl;
 	private JMenu menuHelp;
 	private JMenuItem menuItemTransactionHistory;
+	private JMenuItem menuItemExcelExport;
 	private JMenuItem menuItemHelpContent;
 	private JMenuItem menuItemAbout;
 	private DiagramPanel diagPanel;
+	
+	ViewController vc;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,17 +59,22 @@ public class Window implements ActionListener{
 		List<WalletImpl> income = Arrays.
 				asList(
 						new WalletImpl(0, "Зарплата", new RubleUnit()),
+<<<<<<< HEAD
 						new WalletImpl(0, "Активы", new RubleUnit()),
 						new WalletImpl(0, "Дивиденды", new RubleUnit()),
 						new WalletImpl(0, "Фриланс", new RubleUnit()));
+=======
+						new WalletImpl(0, "Фриланс", new RubleUnit()),
+						new WalletImpl(0, "Дивиденды", new RubleUnit()));
+>>>>>>> origin/master
 
 		List<WalletImpl> expense = Arrays.
 				asList(
-						new WalletImpl(0, "Развлечения", new RubleUnit()),
+						new WalletImpl(0, "ЖКХ", new RubleUnit()),
 						new WalletImpl(0, "Продукты", new RubleUnit()),
-						new WalletImpl(0, "Квартира", new RubleUnit()),
 						new WalletImpl(0, "Транспорт", new RubleUnit()),
-						new WalletImpl(0, "Заведения", new RubleUnit()));
+						new WalletImpl(0, "Образование", new RubleUnit()),
+						new WalletImpl(0, "Развлечения", new RubleUnit()));
 		
 		List<WalletImpl> wallets = Arrays.
 				asList(
@@ -75,10 +83,15 @@ public class Window implements ActionListener{
 						new WalletImpl(0, "PayPal", new RubleUnit()),
 						new WalletImpl(0, "Яндекс.Деньги", new RubleUnit()));
 		
-		ViewController vc = new ViewController(frame);
+		vc = new ViewController(frame);
 		vc.addExpense(expense);
 		vc.addIncome(income);
 		vc.addWallets(wallets);
+		
+		menuItemExcelExport = new JMenuItem("Экспорт в Excel");
+		ExcelExporter al = new ExcelExporter(vc);
+		menuItemExcelExport.addActionListener(al);
+		menuControl.add(menuItemExcelExport);
 	}
 	
 	public Window() {
@@ -131,7 +144,7 @@ public class Window implements ActionListener{
 		
 		menuItemTransactionHistory = new JMenuItem("\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0442\u0440\u0430\u043D\u0437\u0430\u043A\u0446\u0438\u0439");
 		menuControl.add(menuItemTransactionHistory);
-		
+
 		menuHelp = new JMenu("\u041F\u043E\u043C\u043E\u0449\u044C");
 		menuBar.add(menuHelp);
 		
