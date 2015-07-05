@@ -31,14 +31,26 @@ public class ViewController implements Renderable, ActionListener{
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
 	
-	public void addWallets(Collection<WalletImpl> wallets){
+	public List<ComponentManager> getWallets() {
+		return wallets;
+	}
+	
+	public List<ComponentManager> getIncome() {
+		return income;
+	}
+	
+	public List<ComponentManager> getExpense() {
+		return expense;
+	}
+	
+	public void addWallets(List<WalletImpl> wallets){
 		createList(wallets, this.wallets, waColor, getWaRect());
 		
 	}
-	public void addIncome(Collection <WalletImpl> income){
+	public void addIncome(List<WalletImpl> income){
 		createList(income, this.income, inColor, getInRect());
 	}
-	public void addExpense(Collection<WalletImpl> expense){
+	public void addExpense(List<WalletImpl> expense){
 		createList(expense, this.expense, exColor, getExRect());
 	}
 
@@ -157,6 +169,7 @@ public class ViewController implements Renderable, ActionListener{
 		cm.appendTo(frame);
 		render();
 	}
+	
 	
 	private void fill(ComponentManager unknown, DialogFrame frame){
 		int amount = Integer.parseInt(frame.textMonetary.getText());

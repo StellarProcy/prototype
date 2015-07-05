@@ -29,9 +29,12 @@ public class Window implements ActionListener{
 	private JMenu menuControl;
 	private JMenu menuHelp;
 	private JMenuItem menuItemTransactionHistory;
+	private JMenuItem menuItemExcelExport;
 	private JMenuItem menuItemHelpContent;
 	private JMenuItem menuItemAbout;
 	private DiagramPanel diagPanel;
+	
+	ViewController vc;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,10 +72,15 @@ public class Window implements ActionListener{
 						new WalletImpl(0, "PayPal", new RubleUnit()),
 						new WalletImpl(0, "яндекс.ƒеньги", new RubleUnit()));
 		
-		ViewController vc = new ViewController(frame);
+		vc = new ViewController(frame);
 		vc.addExpense(expense);
 		vc.addIncome(income);
 		vc.addWallets(wallets);
+		
+		menuItemExcelExport = new JMenuItem("Ёкспорт в Excel");
+		ExcelExporter al = new ExcelExporter(vc);
+		menuItemExcelExport.addActionListener(al);
+		menuControl.add(menuItemExcelExport);
 	}
 	
 	public Window() {
@@ -125,7 +133,7 @@ public class Window implements ActionListener{
 		
 		menuItemTransactionHistory = new JMenuItem("\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0442\u0440\u0430\u043D\u0437\u0430\u043A\u0446\u0438\u0439");
 		menuControl.add(menuItemTransactionHistory);
-		
+
 		menuHelp = new JMenu("\u041F\u043E\u043C\u043E\u0449\u044C");
 		menuBar.add(menuHelp);
 		
