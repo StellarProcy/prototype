@@ -26,7 +26,8 @@ public class Window implements ActionListener{
 	private GraphPanel gistPanel;
 	private JToggleButton buttonYear;
 	private JToggleButton buttonMonth;
-	private JToggleButton buttonWeek;
+	private JToggleButton buttonQuarter;
+	private JToggleButton buttonAllhistory;
 	
 	private JMenuBar menuBar;
 	private JMenu menuControl;
@@ -105,26 +106,30 @@ public class Window implements ActionListener{
 		
 		diagPanel = new DiagramPanel();
 		diagPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		diagPanel.setBounds(369, 128, 166, 166);
-		diagPanel.setValues(new Integer[]{750,175,150,50,125,100,100,50});
+		diagPanel.setBounds(369, 128, 166, 320);
+		diagPanel.setValues(Database.GetListExpenseHistory(1));
 		frame.getContentPane().add(diagPanel);
 		
-		
-		buttonYear = new JToggleButton("\u0413\u043E\u0434");
-		buttonYear.setBounds(545, 302, 100, 23);
-		buttonYear.addActionListener(this);
-		frame.getContentPane().add(buttonYear);
-		
 		buttonMonth = new JToggleButton("\u041C\u0435\u0441\u044F\u0446");
-		buttonMonth.setBounds(655, 302, 108, 23);
+		buttonMonth.setBounds(580, 302, 110, 23);
 		buttonMonth.addActionListener(this);
 		buttonMonth.setSelected(true);
 		frame.getContentPane().add(buttonMonth);
 		
-		buttonWeek = new JToggleButton("\u041D\u0435\u0434\u0435\u043B\u044F");
-		buttonWeek.setBounds(773, 302, 100, 23);
-		buttonWeek.addActionListener(this);
-		frame.getContentPane().add(buttonWeek);
+		buttonQuarter = new JToggleButton("Квартал");
+		buttonQuarter.setBounds(730, 302, 110, 23);
+		buttonQuarter.addActionListener(this);
+		frame.getContentPane().add(buttonQuarter);
+		
+		buttonYear = new JToggleButton("\u0413\u043E\u0434");
+		buttonYear.setBounds(580, 350, 110, 23);
+		buttonYear.addActionListener(this);
+		frame.getContentPane().add(buttonYear);
+		
+		buttonAllhistory = new JToggleButton("Весь период");
+		buttonAllhistory.setBounds(730, 350, 110, 23);
+		buttonAllhistory.addActionListener(this);
+		frame.getContentPane().add(buttonAllhistory);
 		
 		
 		
