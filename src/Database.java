@@ -140,7 +140,7 @@ public class Database {
 	}
 
 	// вывод списка кошельков
-	public static List<WalletImpl> GetListWallet()
+/*	public static List<WalletImpl> GetListWallet()
 			throws ClassNotFoundException, SQLException {
 		List<WalletImpl> list = new ArrayList<WalletImpl>();
 
@@ -159,7 +159,8 @@ public class Database {
 		}
 		return list;
 	}
-
+*/
+	/*
 	// вывод списка доходов
 	public static List<WalletImpl> GetListIncome()
 			throws ClassNotFoundException, SQLException {
@@ -179,8 +180,9 @@ public class Database {
 			list.add(wallet);
 		}
 		return list;
-	}
+	}*/
 
+	/*
 	// вывод списка расходов
 	public static List<WalletImpl> GetListExpense()
 			throws ClassNotFoundException, SQLException {
@@ -200,7 +202,7 @@ public class Database {
 			list.add(wallet);
 		}
 		return list;
-	}
+	}*/
 
 	// -------- Вывод таблиц--------
 	public static void ReadDB() throws ClassNotFoundException, SQLException {
