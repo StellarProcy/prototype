@@ -58,37 +58,34 @@ public class Window implements ActionListener{
 	private void initializeViewController(){
 		List<WalletImpl> income = Arrays.
 				asList(
-						new WalletImpl(0, "Зарплата", new RubleUnit()),
-<<<<<<< HEAD
-						new WalletImpl(0, "Активы", new RubleUnit()),
-						new WalletImpl(0, "Дивиденды", new RubleUnit()),
-						new WalletImpl(0, "Фриланс", new RubleUnit()));
-=======
-						new WalletImpl(0, "Фриланс", new RubleUnit()),
-						new WalletImpl(0, "Дивиденды", new RubleUnit()));
->>>>>>> origin/master
+						new WalletImpl(0, "Г‡Г Г°ГЇГ«Г ГІГ ", new RubleUnit()),
+						new WalletImpl(0, "ГЂГЄГІГЁГўГ»", new RubleUnit()),
+						new WalletImpl(0, "Г„ГЁГўГЁГ¤ГҐГ­Г¤Г»", new RubleUnit()),
+						new WalletImpl(0, "Г”Г°ГЁГ«Г Г­Г±", new RubleUnit()));
+						new WalletImpl(0, "Г”Г°ГЁГ«Г Г­Г±", new RubleUnit()),
+						new WalletImpl(0, "Г„ГЁГўГЁГ¤ГҐГ­Г¤Г»", new RubleUnit()));
 
 		List<WalletImpl> expense = Arrays.
 				asList(
-						new WalletImpl(0, "ЖКХ", new RubleUnit()),
-						new WalletImpl(0, "Продукты", new RubleUnit()),
-						new WalletImpl(0, "Транспорт", new RubleUnit()),
-						new WalletImpl(0, "Образование", new RubleUnit()),
-						new WalletImpl(0, "Развлечения", new RubleUnit()));
+						new WalletImpl(0, "Г†ГЉГ•", new RubleUnit()),
+						new WalletImpl(0, "ГЏГ°Г®Г¤ГіГЄГІГ»", new RubleUnit()),
+						new WalletImpl(0, "Г’Г°Г Г­Г±ГЇГ®Г°ГІ", new RubleUnit()),
+						new WalletImpl(0, "ГЋГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ", new RubleUnit()),
+						new WalletImpl(0, "ГђГ Г§ГўГ«ГҐГ·ГҐГ­ГЁГї", new RubleUnit()));
 		
 		List<WalletImpl> wallets = Arrays.
 				asList(
-						new WalletImpl(0, "Наличные", new RubleUnit()),
+						new WalletImpl(0, "ГЌГ Г«ГЁГ·Г­Г»ГҐ", new RubleUnit()),
 						new WalletImpl(0, "Visa", new RubleUnit()),
 						new WalletImpl(0, "PayPal", new RubleUnit()),
-						new WalletImpl(0, "Яндекс.Деньги", new RubleUnit()));
+						new WalletImpl(0, "ГџГ­Г¤ГҐГЄГ±.Г„ГҐГ­ГјГЈГЁ", new RubleUnit()));
 		
 		vc = new ViewController(frame);
 		vc.addExpense(expense);
 		vc.addIncome(income);
 		vc.addWallets(wallets);
 		
-		menuItemExcelExport = new JMenuItem("Экспорт в Excel");
+		menuItemExcelExport = new JMenuItem("ГќГЄГ±ГЇГ®Г°ГІ Гў Excel");
 		ExcelExporter al = new ExcelExporter(vc);
 		menuItemExcelExport.addActionListener(al);
 		menuControl.add(menuItemExcelExport);
