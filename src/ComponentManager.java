@@ -21,15 +21,9 @@ public class ComponentManager extends Component {
 	protected IconButton edit = new IconButton();
 
 	protected JTextField field = new JTextField();
-<<<<<<< HEAD
-	
 	protected IconButton info = new IconButton();
 	
-	ComponentManager (WalletImpl wallet){
-=======
-
 	ComponentManager(WalletImpl wallet) {
->>>>>>> origin/master
 		this.wallet = wallet.clone();
 	}
 
@@ -90,15 +84,12 @@ public class ComponentManager extends Component {
 
 		divided = height / SQUARE_RELATION_HEIGHT;
 		width -= divided;
-<<<<<<< HEAD
 		close.setBounds(x + width, y,		    divided, divided);
 		edit.setBounds (x + width, y + divided, divided, divided);
 		info.setBounds (x + width, y + divided + divided, divided, divided);
-=======
 		close.setBounds(x + width, y, divided, divided);
 		edit.setBounds(x + width, y + divided, divided, divided);
 
->>>>>>> origin/master
 		button.setBounds(x, y, width, height);
 	}
 
@@ -110,8 +101,7 @@ public class ComponentManager extends Component {
 		list.add(button);
 		return list;
 	}
-<<<<<<< HEAD
-	
+
 	public void setVisible(boolean arg){
 		super.setVisible(arg);
 		List<Component> list = getComponents();
@@ -119,7 +109,4 @@ public class ComponentManager extends Component {
 			comp.setVisible(arg);
 	}
 	
-=======
-
->>>>>>> origin/master
 }
