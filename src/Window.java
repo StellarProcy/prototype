@@ -57,11 +57,11 @@ public class Window implements ActionListener{
 
 		List<WalletImpl> expense = Arrays.
 				asList(
-						new WalletImpl(0, "Развлечения", new RubleUnit()),
+						new WalletImpl(0, "ЖКХ", new RubleUnit()),
 						new WalletImpl(0, "Продукты", new RubleUnit()),
-						new WalletImpl(0, "Квартира", new RubleUnit()),
 						new WalletImpl(0, "Транспорт", new RubleUnit()),
-						new WalletImpl(0, "Заведения", new RubleUnit()));
+						new WalletImpl(0, "Образование", new RubleUnit()),
+						new WalletImpl(0, "Развлечения", new RubleUnit()));
 		
 		List<WalletImpl> wallets = Arrays.
 				asList(
