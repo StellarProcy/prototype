@@ -32,8 +32,7 @@ public class ViewController implements Renderable, ActionListener{
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
 	
-<<<<<<< HEAD
-	private final String NO_NAME = "Безымянный";
+	private final String NO_NAME = "ГЃГҐГ§Г»Г¬ГїГ­Г­Г»Г©";
 	
 	private final ComponentOrientation categoryOrientation = ComponentOrientation.RIGHT_TO_LEFT;
 	private final ComponentOrientation walletOrientation = ComponentOrientation.LEFT_TO_RIGHT;
@@ -47,7 +46,7 @@ public class ViewController implements Renderable, ActionListener{
 	}
 	public void addExpense(Collection<WalletImpl> expense){
 		createList(expense, this.expense, exColor, getExRect(), categoryOrientation);
-=======
+
 	public List<ComponentManager> getWallets() {
 		return wallets;
 	}
@@ -69,7 +68,6 @@ public class ViewController implements Renderable, ActionListener{
 	}
 	public void addExpense(List<WalletImpl> expense){
 		createList(expense, this.expense, exColor, getExRect());
->>>>>>> origin/master
 	}
 
 	private void initialize(){
@@ -103,9 +101,9 @@ public class ViewController implements Renderable, ActionListener{
 	private List<ComponentManager> expense = new ArrayList<ComponentManager>();
 	
 	
-	private final String addIncomeName = "Добавить доходы";
-	private final String addExpenseName = "Добавить расходы";
-	private final String addWalletName = "Добавить кошелек";
+	private final String addIncomeName = "Г„Г®ГЎГ ГўГЁГІГј Г¤Г®ГµГ®Г¤Г»";
+	private final String addExpenseName = "Г„Г®ГЎГ ГўГЁГІГј Г°Г Г±ГµГ®Г¤Г»";
+	private final String addWalletName = "Г„Г®ГЎГ ГўГЁГІГј ГЄГ®ГёГҐГ«ГҐГЄ";
 	
 	private List<ComponentManager> wallets = new ArrayList<ComponentManager>();
 	
@@ -178,8 +176,8 @@ public class ViewController implements Renderable, ActionListener{
 		buffer = cm;
 		String name;
 		if (statement != ST_EDIT)
-			name = "Создание";
-		else name = "Редактирование";
+			name = "Г‘Г®Г§Г¤Г Г­ГЁГҐ";
+		else name = "ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ Г­ГЁГҐ";
 		dialog = new DialogFrame(frame, true, name + " " + cm.getWallet().getName(), 
 				cm.getWallet().getAmount(), hasComment(cm));
 		dialog.cancelButton.addActionListener(this);
