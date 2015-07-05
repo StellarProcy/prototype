@@ -140,7 +140,7 @@ public class Database {
 	}
 
 	// вывод списка кошельков
-/*	public static List<WalletImpl> GetListWallet()
+	public static List<WalletImpl> GetListWallet()
 			throws ClassNotFoundException, SQLException {
 		List<WalletImpl> list = new ArrayList<WalletImpl>();
 
@@ -150,17 +150,14 @@ public class Database {
 			int id = resSet.getInt("id");
 			String name = resSet.getString("name");
 			int amount = resSet.getInt("amount");
-			WalletImpl wallet = new WalletImpl();
 			Monetary ruble = new RubleUnit(amount);
-			wallet.setID((long) id);
-			wallet.setName(name);
-			wallet.setAmount(ruble);
+			WalletImpl wallet = new WalletImpl(id, name, ruble);
 			list.add(wallet);
 		}
 		return list;
 	}
-*/
-	/*
+
+	
 	// вывод списка доходов
 	public static List<WalletImpl> GetListIncome()
 			throws ClassNotFoundException, SQLException {
@@ -172,17 +169,14 @@ public class Database {
 			int id = resSet.getInt("id");
 			String name = resSet.getString("name");
 			int amount = resSet.getInt("amount");
-			WalletImpl wallet = new WalletImpl();
 			Monetary ruble = new RubleUnit(amount);
-			wallet.setID((long) id);
-			wallet.setName(name);
-			wallet.setAmount(ruble);
+			WalletImpl wallet = new WalletImpl(id, name, ruble);
 			list.add(wallet);
 		}
 		return list;
-	}*/
+	}
 
-	/*
+	
 	// вывод списка расходов
 	public static List<WalletImpl> GetListExpense()
 			throws ClassNotFoundException, SQLException {
@@ -194,15 +188,12 @@ public class Database {
 			int id = resSet.getInt("id");
 			String name = resSet.getString("name");
 			int amount = resSet.getInt("amount");
-			WalletImpl wallet = new WalletImpl();
 			Monetary ruble = new RubleUnit(amount);
-			wallet.setID((long) id);
-			wallet.setName(name);
-			wallet.setAmount(ruble);
+			WalletImpl wallet = new WalletImpl(id, name, ruble);
 			list.add(wallet);
 		}
 		return list;
-	}*/
+	}
 
 	// -------- Вывод таблиц--------
 	public static void ReadDB() throws ClassNotFoundException, SQLException {
