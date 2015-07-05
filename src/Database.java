@@ -19,11 +19,11 @@ public class Database {
 		// DelIncome(8);
 		// Integer in = AddIncome("Бензин");
 		// System.out.println(in + " ответ");
-		// AddExpenseStory(4,1,70);
+		 //AddExpenseStory(2,1,50);
 		// AddIncomeStory(1,1,30);
-		// ReadDB();
+		 //ReadDB();
 		// GetListWallet();
-		GetListExpenseHistory(3);
+		//GetListExpenseHistory(4);
 	}
 
 	// добавление кошелька
@@ -263,19 +263,19 @@ public class Database {
 		String query = "";
 		switch (p) {
 		case 0:
-			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id";
+			query = "SELECT expense.id as id, name, SUM (many) as many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id GROUP BY expense.id";
 			break;
 		case 1:
-			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) and strftime('%y', dateExpense) = strftime('%y', date('now'));";
+			query = "SELECT expense.id as id, name, SUM (many) as many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) AND strftime('%Y', dateExpense) = strftime('%Y', date('now')) GROUP BY expense.id";
 			break;
 		case 2:
-			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) and strftime('%y', dateExpense) = strftime('%y', date('now'));";
+			query = "SELECT expense.id as id, name, SUM (many) as many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%m', dateExpense) = strftime('%m', date('now')) AND strftime('%Y', dateExpense) = strftime('%Y', date('now')) GROUP BY expense.id";
 			break;
 		case 3:
-			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%y', dateExpense) < strftime('%y', date('now'));";
+			query = "SELECT expense.id as id, name, many as many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%Y', dateExpense) = strftime('%Y', date('now')) GROUP BY expense.id";
 			break;
 		case 4:
-			query = "SELECT expenseStory.id as id, name, many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%y', dateExpense) = strftime('%y', date('now')) OR strftime('%y', dateExpense) = strftime('%y', date('now'), '-1 month');";
+			query = "SELECT expense.id as id, name, many as many FROM expenseStory inner join expense on expenseStory.id_expense=expense.id WHERE strftime('%Y', dateExpense) = strftime('%Y', date('now'), '-1 year') OR strftime('%Y', dateExpense) = strftime('%Y', date('now')) GROUP BY expense.id";
 			break;
 
 		}
@@ -290,7 +290,6 @@ public class Database {
 				Monetary ruble = new RubleUnit(many);
 				WalletImpl wallet = new WalletImpl(id, name, ruble);
 				list.add(wallet);
-				System.out.println("id= "+id);
 			}
 			CloseDB();
 		} catch (ClassNotFoundException | SQLException e) {
