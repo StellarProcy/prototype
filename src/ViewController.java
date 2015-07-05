@@ -32,7 +32,7 @@ public class ViewController implements Renderable, ActionListener{
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
 	
-	private final String NO_NAME = "ГЃГҐГ§Г»Г¬ГїГ­Г­Г»Г©";
+	private final String NO_NAME = "Безымянный";
 	
 	private final ComponentOrientation categoryOrientation = ComponentOrientation.RIGHT_TO_LEFT;
 	private final ComponentOrientation walletOrientation = ComponentOrientation.LEFT_TO_RIGHT;
@@ -46,7 +46,7 @@ public class ViewController implements Renderable, ActionListener{
 	}
 	public void addExpense(Collection<WalletImpl> expense){
 		createList(expense, this.expense, exColor, getExRect(), categoryOrientation);
-
+	}
 	public List<ComponentManager> getWallets() {
 		return wallets;
 	}
@@ -58,17 +58,8 @@ public class ViewController implements Renderable, ActionListener{
 	public List<ComponentManager> getExpense() {
 		return expense;
 	}
+
 	
-	public void addWallets(List<WalletImpl> wallets){
-		createList(wallets, this.wallets, waColor, getWaRect());
-		
-	}
-	public void addIncome(List<WalletImpl> income){
-		createList(income, this.income, inColor, getInRect());
-	}
-	public void addExpense(List<WalletImpl> expense){
-		createList(expense, this.expense, exColor, getExRect());
-	}
 
 	private void initialize(){
 		List<JButton> list = Arrays.asList(addIncome, addExpense, addWallet);
@@ -101,9 +92,9 @@ public class ViewController implements Renderable, ActionListener{
 	private List<ComponentManager> expense = new ArrayList<ComponentManager>();
 	
 	
-	private final String addIncomeName = "Г„Г®ГЎГ ГўГЁГІГј Г¤Г®ГµГ®Г¤Г»";
-	private final String addExpenseName = "Г„Г®ГЎГ ГўГЁГІГј Г°Г Г±ГµГ®Г¤Г»";
-	private final String addWalletName = "Г„Г®ГЎГ ГўГЁГІГј ГЄГ®ГёГҐГ«ГҐГЄ";
+	private final String addIncomeName = "Добавить доход";
+	private final String addExpenseName = "Добавить расход";
+	private final String addWalletName = "Добавить кошелек";
 	
 	private List<ComponentManager> wallets = new ArrayList<ComponentManager>();
 	
@@ -176,8 +167,8 @@ public class ViewController implements Renderable, ActionListener{
 		buffer = cm;
 		String name;
 		if (statement != ST_EDIT)
-			name = "Г‘Г®Г§Г¤Г Г­ГЁГҐ";
-		else name = "ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ Г­ГЁГҐ";
+			name = "Создание";
+		else name = "Редактирование";
 		dialog = new DialogFrame(frame, true, name + " " + cm.getWallet().getName(), 
 				cm.getWallet().getAmount(), hasComment(cm));
 		dialog.cancelButton.addActionListener(this);

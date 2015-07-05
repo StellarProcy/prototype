@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/sinbir/git/prototype/lib/poi-3.12-20150511.jar"/>
+	<classpathentry kind="lib" path="D:/java/prototype/lib/poi-3.12-20150511.jar"/>
+	<classpathentry kind="lib" path="D:/java/prototype/lib/sqlite-jdbc-3.8.10.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
