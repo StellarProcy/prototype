@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Insets;
 import java.awt.Rectangle;
@@ -25,21 +26,26 @@ public class ViewController implements Renderable, ActionListener{
 	private JFrame frame;
 	private ComponentManager buffer;
 	private DialogFrame dialog;
-	private int statement = 0;
+	private int statement = 16;
 	private final int ST_NEW_IN = 2;
 	private final int ST_NEW_EX = 4;
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
 	
+	private final String NO_NAME = "Безымянный";
+	
+	private final ComponentOrientation categoryOrientation = ComponentOrientation.RIGHT_TO_LEFT;
+	private final ComponentOrientation walletOrientation = ComponentOrientation.LEFT_TO_RIGHT;
+	
 	public void addWallets(Collection<WalletImpl> wallets){
-		createList(wallets, this.wallets, waColor, getWaRect());
+		createList(wallets, this.wallets, waColor, getWaRect(), walletOrientation);
 		
 	}
 	public void addIncome(Collection <WalletImpl> income){
-		createList(income, this.income, inColor, getInRect());
+		createList(income, this.income, inColor, getInRect(), categoryOrientation);
 	}
 	public void addExpense(Collection<WalletImpl> expense){
-		createList(expense, this.expense, exColor, getExRect());
+		createList(expense, this.expense, exColor, getExRect(), categoryOrientation);
 	}
 
 	private void initialize(){
@@ -109,19 +115,20 @@ public class ViewController implements Renderable, ActionListener{
 	
 	
 	
-	private void createList (Collection <WalletImpl> src, List<ComponentManager> dest, Color color, Rectangle rect){
+	private void createList (Collection <WalletImpl> src, List<ComponentManager> dest, Color color, Rectangle rect, ComponentOrientation orientation){
 		for (WalletImpl wi : src){
 			dest.add(
-					create (wi, color, rect)
+					create (wi, color, rect, orientation)
 					);
 		}
 		render();
 	}
 	
-	public ComponentManager create(WalletImpl wi, Color color, Rectangle rect){
+	public ComponentManager create(WalletImpl wi, Color color, Rectangle rect, ComponentOrientation orientation){
 		ComponentManager cm = new ComponentManager(wi);
 		if (color != null)
 			cm.button.setBackground(color);
+		cm.field.setComponentOrientation(orientation);
 		cm.setName(wi.getName());
 		cm.button.setText(wi.getName());
 		cm.close.addActionListener(this);
@@ -145,20 +152,40 @@ public class ViewController implements Renderable, ActionListener{
 	
 	private void openDialog(ComponentManager cm){
 		buffer = cm;
-		dialog = new DialogFrame(frame, true, cm.getWallet().getName(), 
+		String name;
+		if (statement != ST_EDIT)
+			name = "Создание";
+		else name = "Редактирование";
+		dialog = new DialogFrame(frame, true, name + " " + cm.getWallet().getName(), 
 				cm.getWallet().getAmount(), hasComment(cm));
 		dialog.cancelButton.addActionListener(this);
 		dialog.okButton.addActionListener(this);
 		dialog.setVisible(true);	
 	}
 	
-	private void addComponent(ComponentManager cm, List<ComponentManager> list){
-		list.add(cm);
-		cm.appendTo(frame);
+	private void clearBuffer(){
+		buffer.setVisible(false);
+		frame.remove(buffer);
+		expense.remove(buffer);
+		income.remove(buffer);
+		wallets.remove(buffer);
+		buffer = null;
+	}
+	private void addComponent(ComponentManager cm, List<ComponentManager> list, ComponentOrientation orientation){
+		ComponentManager clone = create(cm.getWallet().clone(), cm.button.getBackground(), cm.getBounds(), orientation);
+		list.add(clone);
+		clearBuffer();
 		render();
 	}
 	
 	private void fill(ComponentManager unknown, DialogFrame frame){
+		if (statement == ST_NEW_EX){
+			addComponent(unknown, expense, categoryOrientation);
+		} else if (statement == ST_NEW_IN){
+			addComponent(unknown, income, categoryOrientation);
+		} else if (statement == ST_NEW_WA){
+			addComponent(unknown, wallets, walletOrientation);
+		}
 		int amount = Integer.parseInt(frame.textMonetary.getText());
 		Monetary monetary = unknown.getWallet().getAmount();
 		String text = frame.textName.getText();
@@ -166,14 +193,6 @@ public class ViewController implements Renderable, ActionListener{
 		unknown.button.setText(text);
 		monetary.set(amount);
 		unknown.field.setText(monetary.toString());
-		
-		if (statement == ST_NEW_EX){
-			addComponent(unknown, expense);
-		} else if (statement == ST_NEW_IN){
-			addComponent(unknown, income);
-		} else if (statement == ST_NEW_WA){
-			addComponent(unknown, wallets);
-		}
 	}
 	
 	private boolean hasComment(ComponentManager cm){
@@ -188,7 +207,9 @@ public class ViewController implements Renderable, ActionListener{
 				delete (frame.getContentPane(),
 						cm.getComponents());
 				
+				cm.setVisible(false);
 				list.remove(cm);
+				frame.repaint();
 				break;
 			} else if (unknown.equals(cm.edit)){
 				openDialog(cm);
@@ -228,12 +249,12 @@ public class ViewController implements Renderable, ActionListener{
 	
 	private void newComponentDialog(int statement, Color color){
 		this.statement = statement;
-		buffer = create(new WalletImpl(-1, "Безымянный", new RubleUnit()), color, categoryRect);
+		buffer = create(new WalletImpl(-1, NO_NAME , new RubleUnit()), 
+				color, categoryRect, categoryOrientation);
 		openDialog(buffer);
 	}
 	
-	
-	
+
 	private void delete(Container content, List<Component> components){
 		for (Component component: components){
 			content.remove(component);

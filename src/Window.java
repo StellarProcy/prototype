@@ -1,9 +1,12 @@
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +43,8 @@ public class Window implements ActionListener{
 					Window window = new Window();
 					window.frame.setVisible(true);
 					window.frame.setResizable(false);
+					
+					window.frame.setIconImage(new ImageIcon("rub.jpg").getImage());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +57,7 @@ public class Window implements ActionListener{
 				asList(
 						new WalletImpl(0, "Зарплата", new RubleUnit()),
 						new WalletImpl(0, "Активы", new RubleUnit()),
-						new WalletImpl(0, "Дивиденты", new RubleUnit()),
+						new WalletImpl(0, "Дивиденды", new RubleUnit()),
 						new WalletImpl(0, "Фриланс", new RubleUnit()));
 
 		List<WalletImpl> expense = Arrays.

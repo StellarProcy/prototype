@@ -8,4 +8,5 @@ public interface Monetary {
 	public int get();
 	public void set(int value);
 	
+	public Monetary clone();
 }

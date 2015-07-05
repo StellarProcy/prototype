@@ -37,7 +37,7 @@ public class DialogFrame extends JDialog{
 	protected JButton cancelButton;
 
 	public DialogFrame(JFrame frame, boolean focus, String name, Monetary current, boolean hasComment){
-		super(frame, "Настройка " + name, focus);
+		super(frame, name, focus);
 		init(name, current);
 		showComment(hasComment);
 	}

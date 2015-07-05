@@ -1,5 +1,5 @@
 
-public class RubleUnit implements Monetary{
+public class RubleUnit implements Monetary, Cloneable{
 	
 	RubleUnit(){
 		this(0);
@@ -36,4 +36,7 @@ public class RubleUnit implements Monetary{
 		return value + token;
 	}
 
+	public RubleUnit clone(){
+		return new RubleUnit(this.value);
+	}
 }

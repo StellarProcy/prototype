@@ -41,7 +41,7 @@ public class WalletImpl implements Wallet, Cloneable{
 	}
 	
 	public WalletImpl clone (){
-		return new WalletImpl(ID, name, amount);
+		return new WalletImpl(ID, name, amount.clone());
 	}
 
 }

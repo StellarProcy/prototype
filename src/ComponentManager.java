@@ -23,6 +23,8 @@ public class ComponentManager extends Component {
 	
 	protected JTextField field = new JTextField();
 	
+	protected IconButton info = new IconButton();
+	
 	ComponentManager (WalletImpl wallet){
 		this.wallet = wallet.clone();
 	}
@@ -58,6 +60,7 @@ public class ComponentManager extends Component {
 		button.setMargin(new Insets(0, 0, 0, 0));
 		close.drawIcon("close.gif");
 		edit.drawIcon("karandash.gif");
+		info.drawIcon("info1.png");
 	}
 	
 	
@@ -67,6 +70,7 @@ public class ComponentManager extends Component {
 		content.add(close);
 		content.add(edit);
 		content.add(field);
+		content.add(info);
 	}
 	
 	
@@ -86,7 +90,7 @@ public class ComponentManager extends Component {
 		width -= divided;
 		close.setBounds(x + width, y,		    divided, divided);
 		edit.setBounds (x + width, y + divided, divided, divided);
-		
+		info.setBounds (x + width, y + divided + divided, divided, divided);
 		button.setBounds(x, y, width, height);
 	}
 	
@@ -100,7 +104,11 @@ public class ComponentManager extends Component {
 		return list;
 	}
 	
-
-	
+	public void setVisible(boolean arg){
+		super.setVisible(arg);
+		List<Component> list = getComponents();
+		for (Component comp: list)
+			comp.setVisible(arg);
+	}
 	
 }
