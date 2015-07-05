@@ -1,23 +1,21 @@
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.MenuContainer;
+import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
-public class ComponentManager extends Component implements Wallet {
+
+public class ComponentManager extends Component {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected RubleUnit balance = new RubleUnit();
+	protected WalletImpl wallet;
 	
 	protected IconButton button = new IconButton();
 	protected IconButton close  = new IconButton();
@@ -25,19 +23,17 @@ public class ComponentManager extends Component implements Wallet {
 	
 	protected JTextField field = new JTextField();
 	
-	private Long ID;
-	private String name;
-	
-	ComponentManager (){
-		this(0, 0, 0, 0);
-	}
-	ComponentManager (int x, int y, int width, int height){
-		this(new Rectangle(x, y, width, height));
-	}
-	ComponentManager (Rectangle rect){
-		this.setBounds(rect);
+	ComponentManager (WalletImpl wallet){
+		this.wallet = wallet.clone();
 	}
 	
+	public WalletImpl getWallet(){
+		return wallet;
+	}
+	
+	public void setWallet(WalletImpl wallet){
+		this.wallet = wallet.clone();
+	}
 	@Override
 	public void setBounds(int x, int y, int width, int height){
 		setBoundsOnComponents(x, y, width, height);
@@ -58,7 +54,8 @@ public class ComponentManager extends Component implements Wallet {
 	
 	private void initialize (){
 		field.setEditable(false);
-		field.setText("0");
+		field.setText(wallet.getAmount().toString());
+		button.setMargin(new Insets(0, 0, 0, 0));
 		close.drawIcon("close.gif");
 		edit.drawIcon("karandash.gif");
 	}
@@ -102,31 +99,7 @@ public class ComponentManager extends Component implements Wallet {
 		list.add(button);
 		return list;
 	}
-	@Override
-	public Long getID() {
-		return ID;
-	}
-	@Override
-	public void setID(Long ID) {
-		this.ID = ID;
-	}
 	
-	@Override
-	public void setName(String name){
-		this.name = name;
-	}
-	@Override
-	public String getName(){
-		return name;
-	}
-	@Override
-	public Monetary getAmount() {
-		return balance;
-	}
-	@Override
-	public void setAmount(Monetary amount) {
-		this.balance = (RubleUnit) amount;
-	}
 
 	
 	

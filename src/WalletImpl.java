@@ -1,34 +1,47 @@
 
-public class WalletImpl implements Wallet {
+public class WalletImpl implements Wallet, Cloneable{
 
-	private Long ID;
+	private int ID;
 	private String name;
-	protected RubleUnit balance = new RubleUnit();
+	private Monetary amount;
 	
+	WalletImpl (int ID, String name, Monetary amount){
+		this.ID = ID;
+		this.name = name;
+		this.amount = amount;
+	}
 	@Override
-	public Long getID() {
+	public int getID() {
 		return ID;
 	}
+
 	@Override
-	public void setID(Long ID) {
+	public void setID(int ID) {
 		this.ID = ID;
 	}
-	
+
 	@Override
-	public void setName(String name){
-		this.name = name;
-	}
-	@Override
-	public String getName(){
+	public String getName() {
 		return name;
 	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public Monetary getAmount() {
-		return balance;
+		return amount;
 	}
+
 	@Override
 	public void setAmount(Monetary amount) {
-		this.balance = (RubleUnit) amount;
+		this.amount = amount;
 	}
 	
+	public WalletImpl clone (){
+		return new WalletImpl(ID, name, amount);
+	}
+
 }
