@@ -12,6 +12,8 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 	 */
 	private static final long serialVersionUID = 1L;
 	private double p = 1;
+	private int[] expense = {10,20,50,80,30,70,60};
+	private int[] income = {40,30,50,10,60,40,50};
 	
 	GraphPanel (){
 		super();
@@ -20,20 +22,42 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 	@Override
 	public void paint (Graphics g){
 		super.paint(g);
-		
+		int xSize=150;
+		int ySize=300;
+		int y=30;
+		int max=expense[0];
+		int min=expense[0];
+		for (int i=1; i<expense.length; i++){
+			if (expense[i]>max){
+				max = expense[i];
+			}else{
+				if (expense[i]<min){
+					min = expense[i];
+				}
+			}
+		}
+		for (int i=1; i<income.length; i++){
+			if (income[i]>max){
+				max = income[i];
+			}else{
+				if (income[i]<min){
+					min = income[i];
+				}
+			}
+		}
+		int yPoint = y;
+		int steps=ySize/expense.length;
 		g.setColor(Color.green);
-		g.fillRect(50, mul(50, p), 50, 500 );
-		
-		g.setColor(Color.blue);
-		g.fillRect(100, mul(100, p), 60, 550);
-
-		g.setColor(Color.CYAN);
-		g.fillRect(160, mul(120, p), 60, 550);
-
-		g.setColor(Color.ORANGE);
-		g.fillRect(220, mul(160, p), 40, 550);
-
-
+		for (int i=1; i<expense.length; i++){
+			g.drawLine(yPoint,expense[i-1]*(xSize/(max-min)),yPoint+steps,expense[i]*(xSize/(max-min)));
+			yPoint+=steps;
+		}
+		yPoint = y;
+		g.setColor(Color.red);
+		for (int i=1; i<income.length; i++){
+			g.drawLine(yPoint,income[i-1]*(xSize/(max-min)),yPoint+steps,income[i]*(xSize/(max-min)));
+			yPoint+=steps;
+		}
 	}
 
 	private int mul (int arg0, double arg1){
@@ -44,12 +68,18 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 
 	@Override
 	public void change(ActionEvent e) {
-		if (e.getActionCommand().equals("Год")){
-			p = 1.5;
-		} else if (e.getActionCommand().equals("Месяц")){
-			p = 1.0;
-		} else if (e.getActionCommand().equals("Неделя")){
-			p = 0.3;
+		if (e.getActionCommand().equals("Месяц")){
+			expense = new int[] {30,20,50,80,70,30,20};
+			income = new int[] {20,30,80,30,60,90,10};
+		} else if (e.getActionCommand().equals("Квартал")){
+			expense = new int[] {30,20,30,80,20,30,20};
+			income = new int[] {20,30,80,40,60,60,20};
+		} else if (e.getActionCommand().equals("Год")){
+			expense = new int[] {50,20,50,80,70,30,90};
+			income = new int[] {70,40,80,30,60,90,10};
+		} else if (e.getActionCommand().equals("Весь период")){
+			expense = new int[] {30,50,80,10,90,40,30};
+			income = new int[] {90,60,90,50,60,20,30};
 		}
 		
 		this.repaint();
