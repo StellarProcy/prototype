@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,31 +57,15 @@ public class Window implements ActionListener{
 	}
 
 	private void initializeViewController(){
-		List<WalletImpl> income = Arrays.
-			    asList(
-			      new WalletImpl(0, "Зарплата", new RubleUnit()),
-			      new WalletImpl(0, "Фриланс", new RubleUnit()),
-			      new WalletImpl(0, "Дивиденды", new RubleUnit()));
 
-			  List<WalletImpl> expense = Arrays.
-			    asList(
-			      new WalletImpl(0, "ЖКХ", new RubleUnit()),
-			      new WalletImpl(0, "Продукты", new RubleUnit()),
-			      new WalletImpl(0, "Транспорт", new RubleUnit()),
-			      new WalletImpl(0, "Образование", new RubleUnit()),
-			      new WalletImpl(0, "Развлечения", new RubleUnit()));
-			  
-			  List<WalletImpl> wallets = Arrays.
-			    asList(
-			      new WalletImpl(0, "Наличные", new RubleUnit()),
-			      new WalletImpl(0, "Visa", new RubleUnit()),
-			      new WalletImpl(0, "PayPal", new RubleUnit()),
-			      new WalletImpl(0, "Яндекс.Деньги", new RubleUnit()));
-		
+		List<WalletImpl> income = Database.GetListIncome();
+		List<WalletImpl> expense = Database.GetListExpense();
+		List<WalletImpl> wallets = Database.GetListWallet();
 		vc = new ViewController(frame);
 		vc.addExpense(expense);
 		vc.addIncome(income);
 		vc.addWallets(wallets);
+		
 		
 		menuItemExcelExport = new JMenuItem("Экспорт в Excel");
 		ExcelExporter al = new ExcelExporter(vc);

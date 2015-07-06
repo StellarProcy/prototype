@@ -25,6 +25,7 @@ public class ViewController implements Renderable, ActionListener{
 	
 	private JFrame frame;
 	private ComponentManager buffer;
+	private ComponentManager delBuffer;
 	private DialogFrame dialog;
 	private ConfirmRemovingDialog confirmDialog;
 	
@@ -218,35 +219,38 @@ public class ViewController implements Renderable, ActionListener{
 			return true;
 		return false;
 	}
+
+	
 	private void check(Object unknown, List<ComponentManager> list){
 		for (ComponentManager cm: list){
 			if (unknown.equals(cm.close)){
+				statement = ST_DEL;
+				delBuffer = cm;
 				confirmDialog = new ConfirmRemovingDialog(frame, true, cm.getName());
 				confirmDialog.cancelButton.addActionListener(this);
 				confirmDialog.okButton.addActionListener(this);
 				confirmDialog.setVisible(true);
-				buffer = cm;
-				statement = ST_DEL;
+				break;
 			} else if (unknown.equals(cm.edit)){
-				openDialog(cm);
 				statement = ST_EDIT;
+				openDialog(cm);
 				break;
 			}
 		}
 	}
-	
+
 	private void check (Object unknown, ConfirmRemovingDialog obj){
-		if (statement != ST_DEL)
+		if (obj == null || statement != ST_DEL)
 			return;
 		if (unknown.equals(obj.cancelButton)){
 			obj.dispose();
 		} else if (unknown.equals(obj.okButton)){
 			delete (frame.getContentPane(),
-					buffer.getComponents());
-			buffer.setVisible(false);
-			wallets.remove(buffer);
-			income.remove(buffer);
-			expense.remove(buffer);
+				delBuffer.getComponents());
+			delBuffer.setVisible(false);
+			wallets.remove(delBuffer);
+			income.remove(delBuffer);
+			expense.remove(delBuffer);
 			frame.repaint();
 			obj.dispose();
 		}

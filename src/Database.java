@@ -26,6 +26,27 @@ public class Database {
 		//GetListExpenseHistory(4);
 	}
 
+	public static void rewriteDB(List<ComponentManager> wallets, List<ComponentManager> income, List<ComponentManager> expense){
+		try {
+			Conn();
+			List<WalletImpl> in = GetListIncome();
+			List<WalletImpl> ex = GetListExpense();
+			List<WalletImpl> wa = GetListWallet();
+			
+			if (in != null)
+				for (WalletImpl wi: in)
+					statmt.execute("DELETE FROM income WHERE id=" + wi.getID());
+			if (ex != null)
+				for (WalletImpl wi: ex)
+					statmt.execute("DELETE FROM expense WHERE id=" + wi.getID());
+			if(wa != null)
+				for (WalletImpl wi: in)
+					statmt.execute("DELETE FROM wallet WHERE id=" + wi.getID());
+			CloseDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	// добавление кошелька
 	public static Integer AddWallet(String name, Integer amount) {
 		Integer idWallet = -1;
