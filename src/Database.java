@@ -26,6 +26,7 @@ public class Database {
 		//GetListExpenseHistory(4);
 	}
 
+
 	public static void rewriteDB(List<ComponentManager> wallets, List<ComponentManager> income, List<ComponentManager> expense){
 		try {
 			Conn();
