@@ -19,35 +19,38 @@ public class Database {
 		// DelIncome(8);
 		// Integer in = AddIncome("Бензин");
 		// System.out.println(in + " ответ");
-		 //AddExpenseStory(2,1,50);
+		// AddExpenseStory(2,1,50);
 		// AddIncomeStory(1,1,30);
-		 //ReadDB();
+		// ReadDB();
 		// GetListWallet();
-		//GetListExpenseHistory(4);
+		// GetListExpenseHistory(4);
+		//WalletImpl impl = new WalletImpl(4,"Транспорт", new RubleUnit(100));
+		//EditExpense(impl);
 	}
 
-
-	public static void rewriteDB(List<ComponentManager> wallets, List<ComponentManager> income, List<ComponentManager> expense){
+	public static void rewriteDB(List<ComponentManager> wallets,
+			List<ComponentManager> income, List<ComponentManager> expense) {
 		try {
 			Conn();
 			List<WalletImpl> in = GetListIncome();
 			List<WalletImpl> ex = GetListExpense();
 			List<WalletImpl> wa = GetListWallet();
-			
+
 			if (in != null)
-				for (WalletImpl wi: in)
+				for (WalletImpl wi : in)
 					statmt.execute("DELETE FROM income WHERE id=" + wi.getID());
 			if (ex != null)
-				for (WalletImpl wi: ex)
+				for (WalletImpl wi : ex)
 					statmt.execute("DELETE FROM expense WHERE id=" + wi.getID());
-			if(wa != null)
-				for (WalletImpl wi: in)
+			if (wa != null)
+				for (WalletImpl wi : in)
 					statmt.execute("DELETE FROM wallet WHERE id=" + wi.getID());
 			CloseDB();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
 	// добавление кошелька
 	public static Integer AddWallet(String name, Integer amount) {
 		Integer idWallet = -1;
@@ -84,6 +87,30 @@ public class Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	// редактирование кошелька
+	public static int EditWallet(WalletImpl impl) {
+		Integer id = impl.getID();
+		String name = impl.getName();
+		Integer many = impl.getAmount().get();
+		try {
+			Conn();
+			resSet = statmt.executeQuery("SELECT id FROM wallet WHERE name='"
+					+ name + "'");
+			if (!resSet.next()) {
+				statmt.execute("UPDATE wallet SET amount = '" + many
+						+ "', name = '" + name + "'WHERE id=" + id + "; ");
+				resSet.close();
+				CloseDB();
+			} else {
+				id = -1;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	// добавление категории доходов
@@ -123,6 +150,30 @@ public class Database {
 		}
 	}
 
+	// редактирование категории доходов
+		public static int EditIncome(WalletImpl impl) {
+			Integer id = impl.getID();
+			String name = impl.getName();
+			Integer many = impl.getAmount().get();
+			try {
+				Conn();
+				resSet = statmt.executeQuery("SELECT id FROM income WHERE name='"
+						+ name + "'");
+				if (!resSet.next()) {
+					statmt.execute("UPDATE income SET amount = '" + many
+							+ "', name = '" + name + "'WHERE id=" + id + "; ");
+					resSet.close();
+					CloseDB();
+				} else {
+					id = -1;
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return id;
+		}
+	
 	// добавление категории расходов
 	public static Integer AddExpense(String name, Integer amount) {
 		Integer idExpense = -1;
@@ -159,6 +210,30 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+	
+	// редактирование категории расходов
+			public static int EditExpense(WalletImpl impl) {
+				Integer id = impl.getID();
+				String name = impl.getName();
+				Integer many = impl.getAmount().get();
+				try {
+					Conn();
+					resSet = statmt.executeQuery("SELECT id FROM expense WHERE name='"
+							+ name + "'");
+					if (!resSet.next()) {
+						statmt.execute("UPDATE expense SET amount = '" + many
+								+ "', name = '" + name + "'WHERE id=" + id + "; ");
+						resSet.close();
+						CloseDB();
+					} else {
+						id = -1;
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return id;
+			}
 
 	// добавление транзакции дохода
 	public static void AddIncomeStory(Integer idIncome, Integer idWallet,
@@ -275,11 +350,8 @@ public class Database {
 	}
 
 	/*
-	 * список расходов за период 0-за весь период;
-	 * 1 - за текущий месяц;
-	 * 2 - за текущий квартал;
-	 * 3 - за текущий год;
-	 * 4 - за последние 2 года;
+	 * список расходов за период 0-за весь период; 1 - за текущий месяц; 2 - за
+	 * текущий квартал; 3 - за текущий год; 4 - за последние 2 года;
 	 */
 	public static List<WalletImpl> GetListExpenseHistory(int p) {
 		String query = "";
