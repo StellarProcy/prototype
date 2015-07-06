@@ -274,7 +274,4 @@ public class ViewController implements Renderable, ActionListener{
 			content.remove(component);
 		}
 	}
-
-
-	
 }
