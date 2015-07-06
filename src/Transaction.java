@@ -1,58 +1,54 @@
-public class Transactions{
+import java.util.Date;
 
-	private static int ID = (Integer) null;
-	private int id_wallet;
-    private int id_category;
-    private int date;
-    private Monetary amount;
-	private Object name;
-	
-	Transactions (int id_wallet, int id_category, Monetary amount){ //не забыть про дату
+public class Transaction {
+
+	private int ID;
+	private int walletID;
+	private int categoryID;
+	private Date date;
+	private Monetary amount;
+
+	Transaction(int ID, int walletID, int categoryID, Date date, Monetary amount) {
 		this.ID = ID;
-		this.name = name;
+		this.walletID = walletID;
+		this.categoryID = categoryID;
+		this.date = date;
 		this.amount = amount;
 	}
-	
 
-	public int getid_wallet() {
+	public int getID() {
 		return ID;
 	}
 
-	
-	public void setid_wallet(int ID) {
-		this.ID = ID;
+	public int getWalletId() {
+		return walletID;
 	}
 
-	public int getid_category1() {
-		return ID;
+	public void setWalletID(int ID) {
+		this.walletID = ID;
 	}
 
-	
-	public void setid_category(int ID) {
-		this.ID = ID;
+	public int getCategoryID() {
+		return categoryID;
 	}
 
+	public void setCategoryID(int ID) {
+		this.categoryID = ID;
+	}
 
-	public int getdate() {
+	public Date getdate() {
 		return date;
 	}
 
-	
-	public void setdate() {
-		//return date;
-		
+	public void setdate(Date date) {
+		this.date = date;
 	}
 
-	
 	public Monetary getAmount() {
 		return amount;
 	}
 
-	
 	public void setAmount(Monetary amount) {
 		this.amount = amount;
 	}
-	
-
-
 }
