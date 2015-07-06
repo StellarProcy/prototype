@@ -26,11 +26,14 @@ public class ViewController implements Renderable, ActionListener{
 	private JFrame frame;
 	private ComponentManager buffer;
 	private DialogFrame dialog;
+	private ConfirmRemovingDialog confirmDialog;
+	
 	private int statement = 16;
 	private final int ST_NEW_IN = 2;
 	private final int ST_NEW_EX = 4;
 	private final int ST_NEW_WA = 8;
 	private final int ST_EDIT = 16;
+	private final int ST_DEL = 32;
 	
 	private final String NO_NAME = "Безымянный";
 	
@@ -159,6 +162,7 @@ public class ViewController implements Renderable, ActionListener{
 		check(unknown, wallets);
 		check(unknown, dialog);
 		check(unknown);
+		check(unknown, confirmDialog);
 		render();	
 	}
 	
@@ -217,14 +221,12 @@ public class ViewController implements Renderable, ActionListener{
 	private void check(Object unknown, List<ComponentManager> list){
 		for (ComponentManager cm: list){
 			if (unknown.equals(cm.close)){
-				
-				delete (frame.getContentPane(),
-						cm.getComponents());
-				
-				cm.setVisible(false);
-				list.remove(cm);
-				frame.repaint();
-				break;
+				confirmDialog = new ConfirmRemovingDialog(frame, true, cm.getName());
+				confirmDialog.cancelButton.addActionListener(this);
+				confirmDialog.okButton.addActionListener(this);
+				confirmDialog.setVisible(true);
+				buffer = cm;
+				statement = ST_DEL;
 			} else if (unknown.equals(cm.edit)){
 				openDialog(cm);
 				statement = ST_EDIT;
@@ -233,6 +235,22 @@ public class ViewController implements Renderable, ActionListener{
 		}
 	}
 	
+	private void check (Object unknown, ConfirmRemovingDialog obj){
+		if (statement != ST_DEL)
+			return;
+		if (unknown.equals(obj.cancelButton)){
+			obj.dispose();
+		} else if (unknown.equals(obj.okButton)){
+			delete (frame.getContentPane(),
+					buffer.getComponents());
+			buffer.setVisible(false);
+			wallets.remove(buffer);
+			income.remove(buffer);
+			expense.remove(buffer);
+			frame.repaint();
+			obj.dispose();
+		}
+	}
 	private void check(Object unknown, DialogFrame obj){
 		if (obj == null)
 			return;

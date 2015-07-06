@@ -38,7 +38,7 @@ public class DialogFrame extends JDialog{
 
 	public DialogFrame(JFrame frame, boolean focus, String name, Monetary current, boolean hasComment){
 		super(frame, name, focus);
-		init(name, current);
+		init(name.replaceAll("\\W+ ", ""), current);
 		showComment(hasComment);
 	}
 

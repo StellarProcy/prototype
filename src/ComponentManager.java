@@ -88,7 +88,6 @@ public class ComponentManager extends Component {
 		edit.setBounds (x + width, y + divided, divided, divided);
 		info.setBounds (x + width, y + divided + divided, divided, divided);
 		close.setBounds(x + width, y, divided, divided);
-		edit.setBounds(x + width, y + divided, divided, divided);
 
 		button.setBounds(x, y, width, height);
 	}
@@ -99,6 +98,7 @@ public class ComponentManager extends Component {
 		list.add(edit);
 		list.add(field);
 		list.add(button);
+		list.add(info);
 		return list;
 	}
 
