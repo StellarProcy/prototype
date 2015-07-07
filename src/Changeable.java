@@ -1,6 +1,4 @@
+public interface Changeable<T> {
 
-
-public interface Changeable <T>{
-	
-	public void change (T e);
+	public void change(T e);
 }

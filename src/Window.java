@@ -1,6 +1,5 @@
 import java.awt.EventQueue;
 
-import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,8 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 
 import java.lang.reflect.Field;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.border.BevelBorder;
