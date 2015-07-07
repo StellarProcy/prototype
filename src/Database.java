@@ -17,6 +17,7 @@ public class Database {
 		// CreateDB();
 		// WriteDB();
 		// DelIncome(8);
+		// DelExpense(8);
 		// Integer in = AddIncome("Бензин");
 		// System.out.println(in + " ответ");
 		// AddExpenseStory(2,1,50);
@@ -142,6 +143,7 @@ public class Database {
 	public static void DelIncome(Integer idIncome) {
 		try {
 			Conn();
+			statmt.execute("DELETE FROM incomeStory WHERE id_income=" + idIncome);
 			statmt.execute("DELETE FROM income WHERE id=" + idIncome);
 			CloseDB();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -203,6 +205,7 @@ public class Database {
 	public static void DelExpense(Integer idExpense) {
 		try {
 			Conn();
+			statmt.execute("DELETE FROM expenseStory WHERE id_expense=" + idExpense);
 			statmt.execute("DELETE FROM expense WHERE id=" + idExpense);
 			CloseDB();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -489,7 +492,7 @@ public class Database {
 		Conn();
 		statmt.execute("INSERT INTO 'income' ('name', 'amount') VALUES ('Зарплата', 0); ");
 		statmt.execute("INSERT INTO 'income' ('name', 'amount') VALUES ('Активы', 0); ");
-		statmt.execute("INSERT INTO 'income' ('name', 'amount') VALUES ('Дивиденты', 0); ");
+		statmt.execute("INSERT INTO 'income' ('name', 'amount') VALUES ('Дивиденды', 0); ");
 		statmt.execute("INSERT INTO 'income' ('name', 'amount') VALUES ('Фриланс', 0); ");
 		statmt.execute("INSERT INTO 'expense' ('name', 'amount') VALUES ('Развлечения', 0); ");
 		statmt.execute("INSERT INTO 'expense' ('name', 'amount') VALUES ('Питание', 0); ");
