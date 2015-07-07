@@ -20,7 +20,7 @@ public class Transaction {
 		return ID;
 	}
 
-	public int getWalletId() {
+	public int getWalletID() {
 		return walletID;
 	}
 
@@ -36,11 +36,11 @@ public class Transaction {
 		this.categoryID = ID;
 	}
 
-	public Date getdate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setdate(Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

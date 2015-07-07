@@ -68,6 +68,9 @@ public class Window implements ActionListener{
 		ExcelExporter al = new ExcelExporter(vc);
 		menuItemExcelExport.addActionListener(al);
 		menuControl.add(menuItemExcelExport);
+		
+		TransactionsTable transTable = new TransactionsTable(vc);
+		menuItemTransactionHistory.addActionListener(transTable);
 	}
 	
 	public Window() {
@@ -122,7 +125,8 @@ public class Window implements ActionListener{
 		menuControl = new JMenu("\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435");
 		menuBar.add(menuControl);
 		
-		menuItemTransactionHistory = new JMenuItem("\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0442\u0440\u0430\u043D\u0437\u0430\u043A\u0446\u0438\u0439");
+		//menuItemTransactionHistory = new JMenuItem("\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0442\u0440\u0430\u043D\u0437\u0430\u043A\u0446\u0438\u0439");
+		menuItemTransactionHistory = new JMenuItem("История транзакций");
 		menuControl.add(menuItemTransactionHistory);
 
 		menuHelp = new JMenu("\u041F\u043E\u043C\u043E\u0449\u044C");
