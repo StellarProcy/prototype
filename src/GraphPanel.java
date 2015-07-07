@@ -11,8 +11,7 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private double p = 1;
-	private int[] expense = {10,20,50,80,30,70,60};
+	private int[] expense = {10,160,50,80,30,70,60};
 	private int[] income = {40,30,50,10,60,40,50};
 	
 	GraphPanel (){
@@ -49,13 +48,17 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 		int steps=ySize/expense.length;
 		g.setColor(Color.green);
 		for (int i=1; i<expense.length; i++){
-			g.drawLine(yPoint,expense[i-1]*(xSize/(max-min)),yPoint+steps,expense[i]*(xSize/(max-min)));
+			int yA = mul(expense[i-1], (double)xSize/(max-min));//expense[i-1]*(xSize%(max-min));
+			int yB = mul(expense[i], (double)xSize/(max-min));//expense[i-1]*(xSize%(max-min));
+			g.drawLine(yPoint,yA,yPoint+steps,yB);
 			yPoint+=steps;
 		}
 		yPoint = y;
 		g.setColor(Color.red);
 		for (int i=1; i<income.length; i++){
-			g.drawLine(yPoint,income[i-1]*(xSize/(max-min)),yPoint+steps,income[i]*(xSize/(max-min)));
+			int yA = mul(income[i-1], (double)xSize/(max-min));//expense[i-1]*(xSize%(max-min));
+			int yB = mul(income[i], (double)xSize/(max-min));//expense[i-1]*(xSize%(max-min));
+			g.drawLine(yPoint,yA,yPoint+steps,yB);
 			yPoint+=steps;
 		}
 	}
@@ -69,7 +72,7 @@ public class GraphPanel extends JPanel implements Changeable<ActionEvent>{
 	@Override
 	public void change(ActionEvent e) {
 		if (e.getActionCommand().equals("Месяц")){
-			expense = new int[] {30,20,50,80,70,30,20};
+			expense = new int[] {30,100,50,80,70,30,20};
 			income = new int[] {20,30,80,30,60,90,10};
 		} else if (e.getActionCommand().equals("Квартал")){
 			expense = new int[] {30,20,30,80,20,30,20};

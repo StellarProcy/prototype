@@ -96,23 +96,23 @@ public class Window implements ActionListener{
 		frame.getContentPane().add(diagPanel);
 		
 		buttonMonth = new JToggleButton("\u041C\u0435\u0441\u044F\u0446");
-		buttonMonth.setBounds(580, 302, 110, 23);
+		buttonMonth.setBounds(545, 315, 110, 25);
 		buttonMonth.addActionListener(this);
 		buttonMonth.setSelected(true);
 		frame.getContentPane().add(buttonMonth);
 		
 		buttonQuarter = new JToggleButton("Квартал");
-		buttonQuarter.setBounds(730, 302, 110, 23);
+		buttonQuarter.setBounds(545, 350, 110, 25);
 		buttonQuarter.addActionListener(this);
 		frame.getContentPane().add(buttonQuarter);
 		
 		buttonYear = new JToggleButton("\u0413\u043E\u0434");
-		buttonYear.setBounds(580, 350, 110, 23);
+		buttonYear.setBounds(545, 385, 110, 25);
 		buttonYear.addActionListener(this);
 		frame.getContentPane().add(buttonYear);
 		
 		buttonAllhistory = new JToggleButton("Весь период");
-		buttonAllhistory.setBounds(730, 350, 110, 23);
+		buttonAllhistory.setBounds(545, 420, 110, 25);
 		buttonAllhistory.addActionListener(this);
 		frame.getContentPane().add(buttonAllhistory);
 		
